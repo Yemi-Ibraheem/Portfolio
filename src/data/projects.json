@@ -1,0 +1,42 @@
+[
+  {
+    "id": "1",
+    "title": "Fintech Mobile App",
+    "role": "Lead Product Designer",
+    "year": "2024",
+    "description": "A comprehensive redesign of a consumer fintech application, focusing on simplified money transfers and clear financial insights.",
+    "imageUrl": "https://images.unsplash.com/photo-1563986768494-4dee2763ff0f?q=80&w=1600&auto=format&fit=crop",
+    "behanceLink": "https://www.behance.net/yemiui",
+    "tags": ["UX Research", "UI Design", "Prototyping"]
+  },
+  {
+    "id": "2",
+    "title": "E-Commerce Experience",
+    "role": "UX/UI Designer",
+    "year": "2023",
+    "description": "Optimized the checkout flow and user experience for an emerging fashion e-commerce brand, increasing conversion rates by 25%.",
+    "imageUrl": "https://images.unsplash.com/photo-1523381210434-271e8be1f52b?q=80&w=1600&auto=format&fit=crop",
+    "behanceLink": "https://www.behance.net/yemiui",
+    "tags": ["Web Design", "Interaction Design", "E-commerce"]
+  },
+  {
+    "id": "3",
+    "title": "Healthcare Dashboard",
+    "role": "Product Designer",
+    "year": "2023",
+    "description": "Designed an intuitive dashboard for healthcare professionals to monitor patient data and manage appointments efficiently.",
+    "imageUrl": "https://images.unsplash.com/photo-1504868584819-f8e8b4b6d7e3?q=80&w=1600&auto=format&fit=crop",
+    "behanceLink": "https://www.behance.net/yemiui",
+    "tags": ["SaaS UI", "Dashboard", "Data Visualization"]
+  },
+  {
+    "id": "4",
+    "title": "Smart Home Hub",
+    "role": "UX Designer",
+    "year": "2022",
+    "description": "A dark-mode focused application controlling IoT smart home devices with seamless onboarding and intuitive controls.",
+    "imageUrl": "https://images.unsplash.com/photo-1558002038-1055907df827?q=80&w=1600&auto=format&fit=crop",
+    "behanceLink": "https://www.behance.net/yemiui",
+    "tags": ["Mobile App", "IoT", "Dark Mode"]
+  }
+]
