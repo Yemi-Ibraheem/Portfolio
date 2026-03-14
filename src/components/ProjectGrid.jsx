@@ -13,8 +13,8 @@ const ProjectGrid = () => {
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
         >
-          <h2 className="text-4xl md:text-5xl font-bold tracking-tight text-white mb-2">Selected Works</h2>
-          <p className="text-gray-400 text-lg">A collection of my recent projects</p>
+          <h2 className="text-4xl md:text-5xl font-bold tracking-tight text-text mb-2">Selected Works</h2>
+          <p className="text-text-muted text-lg">A collection of my recent projects</p>
         </motion.div>
         
         <motion.button
@@ -22,7 +22,7 @@ const ProjectGrid = () => {
           whileInView={{ opacity: 1, x: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
-          className="text-white hover:text-blue-400 transition-colors font-medium underline underline-offset-4"
+          className="text-text hover:text-primary transition-colors font-medium underline underline-offset-4"
         >
           View all on Behance
         </motion.button>

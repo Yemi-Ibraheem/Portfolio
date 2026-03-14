@@ -10,8 +10,8 @@ const ProjectDetail = () => {
 
   if (!project) {
     return (
-      <div className="min-h-screen flex items-center justify-center">
-        <h1 className="text-3xl text-white">Project not found</h1>
+      <div className="min-h-screen flex items-center justify-center bg-background">
+        <h1 className="text-3xl text-text">Project not found</h1>
       </div>
     );
   }
@@ -21,12 +21,12 @@ const ProjectDetail = () => {
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
-      className="w-full min-h-screen text-white pt-10 px-4"
+      className="w-full min-h-screen text-text pt-10 px-4 bg-background transition-colors duration-300"
     >
       <div className="max-w-5xl mx-auto">
         <Link 
           to="/" 
-          className="inline-flex items-center gap-2 text-gray-400 hover:text-white transition-colors mb-12"
+          className="inline-flex items-center gap-2 text-text-muted hover:text-text transition-colors mb-12"
         >
           <ArrowLeft size={20} />
           Back to Works
@@ -40,13 +40,13 @@ const ProjectDetail = () => {
           <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12">
             <div>
               <h1 className="text-5xl md:text-7xl font-bold mb-4">{project.title}</h1>
-              <p className="text-xl text-gray-400 max-w-2xl leading-relaxed">{project.description}</p>
+              <p className="text-xl text-text-muted max-w-2xl leading-relaxed">{project.description}</p>
             </div>
             
             <div className="flex flex-col gap-2 md:text-right shrink-0">
-              <div className="text-gray-500 text-sm uppercase tracking-widest">Role</div>
+              <div className="text-text-muted text-sm uppercase tracking-widest">Role</div>
               <div className="text-lg font-medium">{project.role}</div>
-              <div className="text-gray-500 text-sm uppercase tracking-widest mt-4">Year</div>
+              <div className="text-text-muted text-sm uppercase tracking-widest mt-4">Year</div>
               <div className="text-lg font-medium">{project.year}</div>
             </div>
           </div>
@@ -55,7 +55,7 @@ const ProjectDetail = () => {
             initial={{ scale: 0.95, opacity: 0 }}
             animate={{ scale: 1, opacity: 1 }}
             transition={{ duration: 0.8, delay: 0.4 }}
-            className="w-full aspect-auto md:aspect-[21/9] rounded-3xl overflow-hidden mb-16 shadow-2xl shadow-blue-500/10"
+            className="w-full aspect-auto md:aspect-[21/9] rounded-xl overflow-hidden mb-16 shadow-2xl border border-glass-border"
           >
             <img 
               src={project.imageUrl} 
@@ -65,8 +65,8 @@ const ProjectDetail = () => {
           </motion.div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-12 mb-24">
-            <div className="md:col-span-2 space-y-6 text-gray-300 text-lg leading-relaxed">
-              <h2 className="text-3xl font-bold text-white mb-6">About the project</h2>
+            <div className="md:col-span-2 space-y-6 text-text-muted text-lg leading-relaxed">
+              <h2 className="text-3xl font-bold text-text mb-6">About the project</h2>
               <p>
                 This project represents a deep dive into modern user experience principles, focusing on creating seamless interactions and a beautiful, intuitive interface. The goal was to align user needs with business objectives while maintaining a high aesthetic standard.
               </p>
@@ -76,10 +76,10 @@ const ProjectDetail = () => {
             </div>
             <div className="space-y-8">
               <div>
-                <h3 className="text-xl font-bold text-white mb-4">Technologies & Approaches</h3>
+                <h3 className="text-xl font-bold text-text mb-4">Technologies & Approaches</h3>
                 <div className="flex flex-wrap gap-2">
                   {project.tags.map((tag, i) => (
-                    <span key={i} className="px-4 py-2 rounded-full text-sm border border-gray-700 bg-gray-800/50 text-gray-300">
+                    <span key={i} className="px-4 py-2 rounded-full text-sm border border-glass-border bg-surface/50 text-text-muted">
                       {tag}
                     </span>
                   ))}
@@ -91,7 +91,7 @@ const ProjectDetail = () => {
                   href={project.behanceLink}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center justify-center w-full px-6 py-4 bg-blue-600 hover:bg-blue-500 text-white font-semibold rounded-xl transition-colors"
+                  className="inline-flex items-center justify-center w-full px-6 py-4 bg-primary text-background font-semibold rounded-xl hover:bg-primary/90 transition-colors"
                 >
                   View Full Case Study
                 </a>

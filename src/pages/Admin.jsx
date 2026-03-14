@@ -156,29 +156,29 @@ const Admin = () => {
         <motion.div 
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          className="bg-white p-8 rounded-2xl shadow-xl w-full max-w-md border border-gray-100"
+          className="bg-surface p-8 rounded-xl shadow-xl w-full max-w-md border border-glass-border"
         >
           <div className="flex justify-center mb-6">
-            <div className="p-3 bg-black rounded-xl">
-              <Key className="text-white w-6 h-6" />
+            <div className="p-3 bg-text rounded-xl">
+              <Key className="text-background w-6 h-6" />
             </div>
           </div>
-          <h2 className="text-2xl font-bold text-center mb-6">Admin Login</h2>
+          <h2 className="text-2xl font-bold text-center mb-6 text-text">Admin Login</h2>
           <form onSubmit={handleLogin} className="space-y-4">
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">Admin Password</label>
+              <label className="block text-sm font-medium text-text-muted mb-1">Admin Password</label>
               <input
                 type="password"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
-                className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:outline-none focus:ring-2 focus:ring-black/5 transition-all"
+                className="w-full px-4 py-3 rounded-xl border border-glass-border bg-background text-text focus:outline-none focus:ring-2 focus:ring-primary/20 transition-all"
                 placeholder="••••••••"
                 required
               />
             </div>
             <button
               type="submit"
-              className="w-full bg-black text-white py-3 rounded-xl font-semibold hover:bg-gray-900 transition-colors"
+              className="w-full bg-text text-background py-3 rounded-xl font-semibold hover:opacity-90 transition-colors"
             >
               Access Dashboard
             </button>
@@ -189,11 +189,11 @@ const Admin = () => {
   }
 
   return (
-    <div className="max-w-6xl mx-auto px-4 py-12">
+    <div className="max-w-6xl mx-auto px-4 py-12 bg-background text-text transition-colors duration-300">
       <div className="flex justify-between items-center mb-12">
         <div>
-          <h1 className="text-4xl font-bold text-gray-900">CMS Dashboard</h1>
-          <p className="text-gray-500 mt-2">Manage your portfolio projects</p>
+          <h1 className="text-4xl font-bold text-text">CMS Dashboard</h1>
+          <p className="text-text-muted mt-2">Manage your portfolio projects</p>
         </div>
         <div className="flex gap-4">
           <button
@@ -201,13 +201,13 @@ const Admin = () => {
               setCurrentProject({ title: '', role: '', year: new Date().getFullYear().toString(), description: '', imageUrl: '', behanceLink: '', tags: [] });
               setIsEditing(true);
             }}
-            className="flex items-center gap-2 bg-black text-white px-6 py-3 rounded-xl font-semibold hover:bg-gray-800 transition-all shadow-lg shadow-black/10"
+            className="flex items-center gap-2 bg-primary text-background px-6 py-3 rounded-xl font-semibold hover:bg-primary/90 transition-all shadow-lg shadow-primary/10"
           >
             <Plus size={20} /> Add Project
           </button>
           <button
             onClick={handleLogout}
-            className="flex items-center gap-2 border border-gray-200 px-6 py-3 rounded-xl font-semibold hover:bg-gray-50 transition-all"
+            className="flex items-center gap-2 border border-glass-border px-6 py-3 rounded-xl font-semibold hover:bg-surface transition-all text-text"
           >
             <LogOut size={20} /> Logout
           </button>
@@ -229,7 +229,7 @@ const Admin = () => {
           <motion.div
             key={project.id}
             layout
-            className="bg-white rounded-2xl border border-gray-100 overflow-hidden shadow-sm hover:shadow-md transition-shadow group"
+            className="bg-surface rounded-xl border border-glass-border overflow-hidden shadow-sm hover:shadow-md transition-shadow group"
           >
             <div className="h-48 overflow-hidden relative">
               <img 
@@ -256,11 +256,11 @@ const Admin = () => {
               </div>
             </div>
             <div className="p-6">
-              <div className="text-xs font-semibold text-gray-400 uppercase tracking-wider mb-2">{project.year} • {project.role}</div>
-              <h3 className="text-xl font-bold text-gray-900 mb-2">{project.title}</h3>
+              <div className="text-xs font-semibold text-text-muted uppercase tracking-wider mb-2">{project.year} • {project.role}</div>
+              <h3 className="text-xl font-bold text-text mb-2">{project.title}</h3>
               <div className="flex flex-wrap gap-2">
                 {project.tags.slice(0, 3).map(tag => (
-                  <span key={tag} className="text-[10px] bg-gray-100 px-2 py-1 rounded-full font-medium text-gray-600 capitalize">
+                  <span key={tag} className="text-[10px] bg-background px-2 py-1 rounded-full font-medium text-text-muted capitalize border border-glass-border">
                     {tag}
                   </span>
                 ))}
@@ -277,11 +277,11 @@ const Admin = () => {
               initial={{ opacity: 0, scale: 0.95 }}
               animate={{ opacity: 1, scale: 1 }}
               exit={{ opacity: 0, scale: 0.95 }}
-              className="bg-white rounded-3xl w-full max-w-2xl max-h-[90vh] overflow-y-auto"
+              className="bg-surface rounded-xl w-full max-w-2xl max-h-[90vh] overflow-y-auto border border-glass-border"
             >
-              <div className="p-8 border-b border-gray-100 flex justify-between items-center sticky top-0 bg-white/80 backdrop-blur-md z-10">
-                <h2 className="text-2xl font-bold">{currentProject.id ? 'Edit Project' : 'New Project'}</h2>
-                <button onClick={() => setIsEditing(false)} className="text-gray-400 hover:text-black">
+              <div className="p-8 border-b border-glass-border flex justify-between items-center sticky top-0 bg-surface/80 backdrop-blur-md z-10">
+                <h2 className="text-2xl font-bold text-text">{currentProject.id ? 'Edit Project' : 'New Project'}</h2>
+                <button onClick={() => setIsEditing(false)} className="text-text-muted hover:text-text">
                   <X size={24} />
                 </button>
               </div>
@@ -290,59 +290,59 @@ const Admin = () => {
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   <div className="space-y-4">
                     <div>
-                      <label className="block text-sm font-medium text-gray-700 mb-1">Project Title</label>
+                      <label className="block text-sm font-medium text-text-muted mb-1">Project Title</label>
                       <input
                         type="text"
                         value={currentProject.title}
                         onChange={(e) => setCurrentProject({ ...currentProject, title: e.target.value })}
-                        className="w-full px-4 py-2 rounded-xl border border-gray-200 focus:outline-none focus:ring-2 focus:ring-black/5"
+                        className="w-full px-4 py-2 rounded-xl border border-glass-border bg-background text-text focus:outline-none focus:ring-2 focus:ring-primary/20"
                         required
                       />
                     </div>
                     <div>
-                      <label className="block text-sm font-medium text-gray-700 mb-1">Role</label>
+                      <label className="block text-sm font-medium text-text-muted mb-1">Role</label>
                       <input
                         type="text"
                         value={currentProject.role}
                         onChange={(e) => setCurrentProject({ ...currentProject, role: e.target.value })}
-                        className="w-full px-4 py-2 rounded-xl border border-gray-200 focus:outline-none focus:ring-2 focus:ring-black/5"
+                        className="w-full px-4 py-2 rounded-xl border border-glass-border bg-background text-text focus:outline-none focus:ring-2 focus:ring-primary/20"
                         required
                       />
                     </div>
                     <div>
-                      <label className="block text-sm font-medium text-gray-700 mb-1">Year</label>
+                      <label className="block text-sm font-medium text-text-muted mb-1">Year</label>
                       <input
                         type="text"
                         value={currentProject.year}
                         onChange={(e) => setCurrentProject({ ...currentProject, year: e.target.value })}
-                        className="w-full px-4 py-2 rounded-xl border border-gray-200 focus:outline-none focus:ring-2 focus:ring-black/5"
+                        className="w-full px-4 py-2 rounded-xl border border-glass-border bg-background text-text focus:outline-none focus:ring-2 focus:ring-primary/20"
                         required
                       />
                     </div>
                     <div>
-                      <label className="block text-sm font-medium text-gray-700 mb-1">Behance Link</label>
+                      <label className="block text-sm font-medium text-text-muted mb-1">Behance Link</label>
                       <input
                         type="url"
                         value={currentProject.behanceLink}
                         onChange={(e) => setCurrentProject({ ...currentProject, behanceLink: e.target.value })}
-                        className="w-full px-4 py-2 rounded-xl border border-gray-200 focus:outline-none focus:ring-2 focus:ring-black/5"
+                        className="w-full px-4 py-2 rounded-xl border border-glass-border bg-background text-text focus:outline-none focus:ring-2 focus:ring-primary/20"
                       />
                     </div>
                   </div>
 
                   <div className="space-y-4">
                     <div>
-                      <label className="block text-sm font-medium text-gray-700 mb-1">Project Image</label>
+                      <label className="block text-sm font-medium text-text-muted mb-1">Project Image</label>
                       <div 
-                        className="relative h-40 rounded-2xl border-2 border-dashed border-gray-200 overflow-hidden flex flex-col items-center justify-center bg-gray-50 group hover:bg-gray-100 transition-colors cursor-pointer"
+                        className="relative h-40 rounded-xl border-2 border-dashed border-glass-border overflow-hidden flex flex-col items-center justify-center bg-background group hover:bg-surface transition-colors cursor-pointer"
                         onClick={() => document.getElementById('imageUpload').click()}
                       >
                         {currentProject.imageUrl ? (
                           <img src={currentProject.imageUrl} className="w-full h-full object-cover" alt="Preview" />
                         ) : (
                           <div className="text-center">
-                            <Upload className="mx-auto text-gray-400 mb-2" />
-                            <span className="text-xs text-gray-500 font-medium">Click to upload image</span>
+                            <Upload className="mx-auto text-text-muted mb-2" />
+                            <span className="text-xs text-text-muted font-medium">Click to upload image</span>
                           </div>
                         )}
                         <input 
@@ -355,12 +355,12 @@ const Admin = () => {
                       </div>
                     </div>
                     <div>
-                      <label className="block text-sm font-medium text-gray-700 mb-1">Tags (comma separated)</label>
+                      <label className="block text-sm font-medium text-text-muted mb-1">Tags (comma separated)</label>
                       <input
                         type="text"
                         value={currentProject.tags.join(', ')}
                         onChange={(e) => setCurrentProject({ ...currentProject, tags: e.target.value.split(',').map(t => t.trim()) })}
-                        className="w-full px-4 py-2 rounded-xl border border-gray-200 focus:outline-none focus:ring-2 focus:ring-black/5"
+                        className="w-full px-4 py-2 rounded-xl border border-glass-border bg-background text-text focus:outline-none focus:ring-2 focus:ring-primary/20"
                         placeholder="UI Design, Web, Mobile"
                       />
                     </div>
@@ -368,12 +368,12 @@ const Admin = () => {
                 </div>
 
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">Description</label>
+                  <label className="block text-sm font-medium text-text-muted mb-1">Description</label>
                   <textarea
                     rows="4"
                     value={currentProject.description}
                     onChange={(e) => setCurrentProject({ ...currentProject, description: e.target.value })}
-                    className="w-full px-4 py-2 rounded-xl border border-gray-200 focus:outline-none focus:ring-2 focus:ring-black/5"
+                    className="w-full px-4 py-2 rounded-xl border border-glass-border bg-background text-text focus:outline-none focus:ring-2 focus:ring-primary/20"
                     required
                   ></textarea>
                 </div>
@@ -382,14 +382,14 @@ const Admin = () => {
                   <button
                     type="submit"
                     disabled={loading}
-                    className="flex-1 bg-black text-white py-4 rounded-2xl font-bold flex items-center justify-center gap-2 hover:bg-gray-800 transition-all disabled:opacity-50 shadow-xl shadow-black/10"
+                    className="flex-1 bg-text text-background py-4 rounded-xl font-bold flex items-center justify-center gap-2 hover:opacity-90 transition-all disabled:opacity-50 shadow-xl shadow-primary/10"
                   >
                     {loading ? 'Saving...' : <><Save size={20} /> Save Project</>}
                   </button>
                   <button
                     type="button"
                     onClick={() => setIsEditing(false)}
-                    className="flex-1 border border-gray-200 text-gray-700 py-4 rounded-2xl font-bold hover:bg-gray-50 transition-all"
+                    className="flex-1 border border-glass-border text-text py-4 rounded-xl font-bold hover:bg-surface transition-all"
                   >
                     Cancel
                   </button>

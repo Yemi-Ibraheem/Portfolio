@@ -1,28 +1,51 @@
 @import "tailwindcss";
 
 @theme {
-  --color-background: #0f1115;
-  --color-surface: #1a1d24;
-  --color-primary: #3b82f6;
-  --color-text: #f3f4f6;
-  --color-text-muted: #9ca3af;
+  --color-background: var(--background);
+  --color-surface: var(--surface);
+  --color-primary: var(--primary);
+  --color-text: var(--text);
+  --color-text-muted: var(--text-muted);
   --font-sans: 'Inter', system-ui, sans-serif;
+  --radius-xl: 32px;
+}
+
+:root {
+  /* Dark Mode (Default) */
+  --background: #0a0a0a;
+  --surface: #141414;
+  --primary: #3b82f6;
+  --text: #f3f4f6;
+  --text-muted: #a1a1aa;
+  --glass-bg: rgba(20, 20, 20, 0.7);
+  --glass-border: rgba(255, 255, 255, 0.05);
+}
+
+[data-theme='light'] {
+  /* Light Mode (Leah Lee inspired) */
+  --background: #ffffff;
+  --surface: #f7f7f7;
+  --primary: #ff6b5b; /* Leah Lee accent */
+  --text: #000000;
+  --text-muted: #787878;
+  --glass-bg: rgba(255, 255, 255, 0.7);
+  --glass-border: rgba(0, 0, 0, 0.05);
 }
 
 @layer base {
   body {
-    @apply bg-background text-text font-sans antialiased overflow-x-hidden;
-    background-color: var(--color-background);
-    color: var(--color-text);
+    @apply bg-background text-text font-sans antialiased overflow-x-hidden transition-colors duration-300;
+    background-color: var(--background);
+    color: var(--text);
   }
 }
 
 /* Custom Utilities for Glassmorphism & Scrolling */
 .glass {
-  background: rgba(26, 29, 36, 0.7);
+  background: var(--glass-bg);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  border-bottom: 1px solid var(--glass-border);
 }
 
 html {
