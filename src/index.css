@@ -11,18 +11,7 @@
 }
 
 :root {
-  /* Dark Mode (Default) */
-  --background: #0a0a0a;
-  --surface: #141414;
-  --primary: #3b82f6;
-  --text: #f3f4f6;
-  --text-muted: #a1a1aa;
-  --glass-bg: rgba(20, 20, 20, 0.7);
-  --glass-border: rgba(255, 255, 255, 0.05);
-}
-
-[data-theme='light'] {
-  /* Light Mode (Leah Lee inspired) */
+  /* Light Mode (Default - Leah Lee inspired) */
   --background: #ffffff;
   --surface: #f7f7f7;
   --primary: #ff6b5b; /* Leah Lee accent */
@@ -30,6 +19,17 @@
   --text-muted: #787878;
   --glass-bg: rgba(255, 255, 255, 0.7);
   --glass-border: rgba(0, 0, 0, 0.05);
+}
+
+[data-theme='dark'] {
+  /* Dark Mode */
+  --background: #0a0a0a;
+  --surface: #141414;
+  --primary: #3b82f6;
+  --text: #f3f4f6;
+  --text-muted: #a1a1aa;
+  --glass-bg: rgba(20, 20, 20, 0.7);
+  --glass-border: rgba(255, 255, 255, 0.05);
 }
 
 @layer base {
