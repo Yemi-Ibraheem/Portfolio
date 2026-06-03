@@ -21,6 +21,8 @@ app.use(express.json());
 const projectsPath = path.join(__dirname, 'src', 'data', 'projects.json');
 const uploadsDir = path.join(__dirname, 'public', 'uploads');
 
+app.use('/uploads', express.static(uploadsDir));
+
 // Ensure uploads directory exists
 if (!fs.existsSync(uploadsDir)) {
   fs.mkdirSync(uploadsDir, { recursive: true });
@@ -42,19 +44,23 @@ const upload = multer({ storage });
 // Middleware to check admin password
 const authMiddleware = (req, res, next) => {
   const password = req.headers['x-admin-password'];
-  if (password === process.env.ADMIN_PASSWORD) {
+  if (process.env.ADMIN_PASSWORD && password === process.env.ADMIN_PASSWORD) {
     next();
   } else {
     res.status(401).json({ message: 'Unauthorized' });
   }
 };
 
+app.get('/api/auth', authMiddleware, (req, res) => {
+  res.json({ authenticated: true });
+});
+
 // Get projects
 app.get('/api/projects', (req, res) => {
   try {
     const data = fs.readFileSync(projectsPath, 'utf8');
     res.json(JSON.parse(data));
-  } catch (error) {
+  } catch {
     res.status(500).json({ error: 'Failed to read projects data' });
   }
 });
@@ -65,7 +71,7 @@ app.post('/api/projects', authMiddleware, (req, res) => {
     const projects = req.body;
     fs.writeFileSync(projectsPath, JSON.stringify(projects, null, 2));
     res.json({ message: 'Projects updated successfully' });
-  } catch (error) {
+  } catch {
     res.status(500).json({ error: 'Failed to save projects data' });
   }
 });

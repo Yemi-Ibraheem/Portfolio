@@ -22,7 +22,7 @@ function App() {
     <Router>
       <div className="min-h-screen flex flex-col relative w-full bg-background text-text transition-colors duration-300">
         <Navbar theme={theme} toggleTheme={toggleTheme} />
-        <main className="flex-grow pt-20"> {/* pt-20 to account for fixed navbar */}
+        <main className="flex-grow">
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/admin" element={<Admin />} />

@@ -7,40 +7,61 @@
   --color-text: var(--text);
   --color-text-muted: var(--text-muted);
   --font-sans: 'Inter', system-ui, sans-serif;
-  --radius-xl: 32px;
+  --radius-xl: 28px;
 }
 
 :root {
-  /* Light Mode (Default - Leah Lee inspired) */
-  --background: #ffffff;
-  --surface: #f7f7f7;
-  --primary: #ff6b5b; /* Leah Lee accent */
-  --text: #000000;
-  --text-muted: #787878;
-  --glass-bg: rgba(255, 255, 255, 0.7);
-  --glass-border: rgba(0, 0, 0, 0.05);
+  --background: #fbfaf7;
+  --surface: #ece8df;
+  --primary: #e6542d;
+  --text: #12110f;
+  --text-muted: #68645d;
+  --glass-bg: rgba(251, 250, 247, 0.78);
+  --glass-border: rgba(18, 17, 15, 0.12);
 }
 
 [data-theme='dark'] {
-  /* Dark Mode */
-  --background: #0a0a0a;
-  --surface: #141414;
-  --primary: #3b82f6;
-  --text: #f3f4f6;
-  --text-muted: #a1a1aa;
-  --glass-bg: rgba(20, 20, 20, 0.7);
-  --glass-border: rgba(255, 255, 255, 0.05);
+  --background: #11110f;
+  --surface: #1f211d;
+  --primary: #e6542d;
+  --text: #f7f3eb;
+  --text-muted: #aaa49a;
+  --glass-bg: rgba(17, 17, 15, 0.78);
+  --glass-border: rgba(247, 243, 235, 0.12);
 }
 
 @layer base {
+  * {
+    box-sizing: border-box;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
   body {
     @apply bg-background text-text font-sans antialiased overflow-x-hidden transition-colors duration-300;
     background-color: var(--background);
     color: var(--text);
   }
+
+  button,
+  a,
+  input,
+  textarea {
+    letter-spacing: 0;
+  }
+
+  button {
+    cursor: pointer;
+  }
+
+  button:disabled {
+    cursor: not-allowed;
+    opacity: 0.45;
+  }
 }
 
-/* Custom Utilities for Glassmorphism & Scrolling */
 .glass {
   background: var(--glass-bg);
   backdrop-filter: blur(12px);
@@ -48,6 +69,32 @@
   border-bottom: 1px solid var(--glass-border);
 }
 
-html {
-  scroll-behavior: smooth;
+.work-marquee {
+  width: max-content;
+  animation: work-marquee 36s linear infinite;
+}
+
+.work-marquee:hover {
+  animation-play-state: paused;
+}
+
+@keyframes work-marquee {
+  from {
+    transform: translateX(0);
+  }
+
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    scroll-behavior: auto !important;
+    transition-duration: 0.01ms !important;
+  }
 }

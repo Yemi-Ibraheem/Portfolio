@@ -1,46 +1,83 @@
-import React, { useState, useEffect } from 'react';
-import { Plus, Edit2, Trash2, X, Upload, Save, LogOut, Key } from 'lucide-react';
-import { motion, AnimatePresence } from 'framer-motion';
+import React, { useCallback, useEffect, useMemo, useState } from 'react';
+import { Plus, Edit2, Trash2, X, Upload, Save, LogOut, Key, GripVertical } from 'lucide-react';
+import { motion as Motion, AnimatePresence } from 'framer-motion';
+import { API_BASE, fallbackProjectList, normaliseProjects } from '../lib/projects';
 
-const API_BASE = 'http://localhost:5000/api';
+const emptyProject = () => ({
+  title: '',
+  role: '',
+  year: new Date().getFullYear().toString(),
+  description: '',
+  imageUrl: '',
+  behanceLink: '',
+  industry: '',
+  tags: [],
+});
 
 const Admin = () => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [password, setPassword] = useState('');
-  const [projects, setProjects] = useState([]);
+  const [projects, setProjects] = useState(fallbackProjectList);
   const [isEditing, setIsEditing] = useState(false);
-  const [currentProject, setCurrentProject] = useState(null);
+  const [currentProject, setCurrentProject] = useState(emptyProject());
   const [loading, setLoading] = useState(false);
   const [statusMessage, setStatusMessage] = useState('');
+  const [errorMessage, setErrorMessage] = useState('');
+
+  const sortedProjects = useMemo(() => projects, [projects]);
+
+  const showStatus = useCallback((message) => {
+    setStatusMessage(message);
+    setErrorMessage('');
+    setTimeout(() => setStatusMessage(''), 3000);
+  }, []);
+
+  const showError = useCallback((message) => {
+    setErrorMessage(message);
+    setStatusMessage('');
+  }, []);
+
+  const fetchProjects = useCallback(async () => {
+    try {
+      const response = await fetch(`${API_BASE}/projects`);
+      const data = await response.json();
+      setProjects(normaliseProjects(data));
+    } catch (error) {
+      console.error('Fetch projects failed', error);
+    }
+  }, []);
+
+  const checkAuth = useCallback(async (pwd) => {
+    try {
+      const response = await fetch(`${API_BASE}/auth`, {
+        headers: { 'x-admin-password': pwd },
+      });
+
+      if (!response.ok) throw new Error('Invalid password');
+
+      setIsAuthenticated(true);
+      localStorage.setItem('adminPassword', pwd);
+      await fetchProjects();
+    } catch {
+      setIsAuthenticated(false);
+      localStorage.removeItem('adminPassword');
+      showError('That password did not work. Check ADMIN_PASSWORD in .env.local.');
+    }
+  }, [fetchProjects, showError]);
 
   useEffect(() => {
     const savedPassword = localStorage.getItem('adminPassword');
     if (savedPassword) {
       setPassword(savedPassword);
       checkAuth(savedPassword);
+    } else {
+      fetchProjects();
     }
-  }, []);
+  }, [checkAuth, fetchProjects]);
 
-  const checkAuth = async (pwd) => {
-    try {
-      const res = await fetch(`${API_BASE}/projects`);
-      if (res.ok) {
-        setIsAuthenticated(true);
-        localStorage.setItem('adminPassword', pwd);
-        fetchProjects();
-      }
-    } catch (error) {
-      console.error('Auth check failed', error);
-    }
-  };
-
-  const handleLogin = (e) => {
-    e.preventDefault();
-    // We'll trust the first request to fail if password is wrong in later actions
-    // For now, simple check - in a real app we'd have a /login endpoint
-    setIsAuthenticated(true);
-    localStorage.setItem('adminPassword', password);
-    fetchProjects();
+  const handleLogin = (event) => {
+    event.preventDefault();
+    checkAuth(password);
   };
 
   const handleLogout = () => {
@@ -49,79 +86,63 @@ const Admin = () => {
     localStorage.removeItem('adminPassword');
   };
 
-  const fetchProjects = async () => {
-    try {
-      const res = await fetch(`${API_BASE}/projects`);
-      const data = await res.json();
-      setProjects(data);
-    } catch (error) {
-      console.error('Fetch projects failed', error);
+  const persistProjects = async (updatedProjects, successMessage) => {
+    const response = await fetch(`${API_BASE}/projects`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'x-admin-password': password,
+      },
+      body: JSON.stringify(updatedProjects),
+    });
+
+    if (!response.ok) {
+      throw new Error('Save failed');
     }
+
+    setProjects(updatedProjects);
+    showStatus(successMessage);
   };
 
-  const handleSaveProject = async (e) => {
-    e.preventDefault();
+  const handleSaveProject = async (event) => {
+    event.preventDefault();
     setLoading(true);
-    
-    let updatedProjects;
-    if (currentProject.id) {
-      updatedProjects = projects.map(p => p.id === currentProject.id ? currentProject : p);
-    } else {
-      const newId = (Math.max(0, ...projects.map(p => parseInt(p.id))) + 1).toString();
-      updatedProjects = [...projects, { ...currentProject, id: newId }];
-    }
+
+    const normalisedCurrent = {
+      ...currentProject,
+      id: currentProject.id || (Math.max(0, ...projects.map((project) => Number(project.id) || 0)) + 1).toString(),
+      tags: currentProject.tags.filter(Boolean),
+    };
+
+    const updatedProjects = currentProject.id
+      ? projects.map((project) => (project.id === currentProject.id ? normalisedCurrent : project))
+      : [...projects, normalisedCurrent];
 
     try {
-      const res = await fetch(`${API_BASE}/projects`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'x-admin-password': password
-        },
-        body: JSON.stringify(updatedProjects)
-      });
-
-      if (res.ok) {
-        setProjects(updatedProjects);
-        setIsEditing(false);
-        setStatusMessage('Saved successfully!');
-        setTimeout(() => setStatusMessage(''), 3000);
-      } else {
-        alert('Failed to save. Check password.');
-      }
+      await persistProjects(updatedProjects, 'Project saved.');
+      setIsEditing(false);
+      setCurrentProject(emptyProject());
     } catch (error) {
       console.error('Save failed', error);
+      showError('Save failed. Confirm the CMS server is running and the password is correct.');
     } finally {
       setLoading(false);
     }
   };
 
   const handleDeleteProject = async (id) => {
-    if (!window.confirm('Are you sure you want to delete this project?')) return;
+    if (!window.confirm('Delete this project?')) return;
 
-    const updatedProjects = projects.filter(p => p.id !== id);
     try {
-      const res = await fetch(`${API_BASE}/projects`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'x-admin-password': password
-        },
-        body: JSON.stringify(updatedProjects)
-      });
-
-      if (res.ok) {
-        setProjects(updatedProjects);
-        setStatusMessage('Deleted successfully!');
-        setTimeout(() => setStatusMessage(''), 3000);
-      }
+      await persistProjects(projects.filter((project) => project.id !== id), 'Project deleted.');
     } catch (error) {
       console.error('Delete failed', error);
+      showError('Delete failed. Confirm your password and try again.');
     }
   };
 
-  const handleFileUpload = async (e) => {
-    const file = e.target.files[0];
+  const handleFileUpload = async (event) => {
+    const file = event.target.files[0];
     if (!file) return;
 
     const formData = new FormData();
@@ -129,273 +150,289 @@ const Admin = () => {
 
     try {
       setLoading(true);
-      const res = await fetch(`${API_BASE}/upload`, {
+      const response = await fetch(`${API_BASE}/upload`, {
         method: 'POST',
-        headers: {
-          'x-admin-password': password
-        },
-        body: formData
+        headers: { 'x-admin-password': password },
+        body: formData,
       });
 
-      if (res.ok) {
-        const data = await res.json();
-        setCurrentProject({ ...currentProject, imageUrl: data.imageUrl });
-      } else {
-        alert('Upload failed. Check password.');
-      }
+      if (!response.ok) throw new Error('Upload failed');
+
+      const data = await response.json();
+      setCurrentProject((project) => ({ ...project, imageUrl: data.imageUrl }));
+      showStatus('Image uploaded.');
     } catch (error) {
       console.error('Upload failed', error);
+      showError('Upload failed. Confirm the CMS server is running and the password is correct.');
     } finally {
       setLoading(false);
     }
   };
 
+  const moveProject = async (id, direction) => {
+    const index = projects.findIndex((project) => project.id === id);
+    const targetIndex = index + direction;
+    if (targetIndex < 0 || targetIndex >= projects.length) return;
+
+    const updatedProjects = [...projects];
+    [updatedProjects[index], updatedProjects[targetIndex]] = [updatedProjects[targetIndex], updatedProjects[index]];
+
+    try {
+      await persistProjects(updatedProjects, 'Project order updated.');
+    } catch (error) {
+      console.error('Reorder failed', error);
+      showError('Reorder failed. Try again.');
+    }
+  };
+
   if (!isAuthenticated) {
     return (
-      <div className="flex items-center justify-center min-h-[70vh] px-4">
-        <motion.div 
+      <div className="flex min-h-screen items-center justify-center bg-background px-4 pt-28">
+        <Motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          className="bg-surface p-8 rounded-xl shadow-xl w-full max-w-md border border-glass-border"
+          className="w-full max-w-md rounded-[28px] border border-glass-border bg-surface p-8 shadow-[0_24px_90px_rgba(0,0,0,0.12)]"
         >
-          <div className="flex justify-center mb-6">
-            <div className="p-3 bg-text rounded-xl">
-              <Key className="text-background w-6 h-6" />
-            </div>
+          <div className="mb-6 grid h-12 w-12 place-items-center rounded-full bg-text text-background">
+            <Key size={22} />
           </div>
-          <h2 className="text-2xl font-bold text-center mb-6 text-text">Admin Login</h2>
-          <form onSubmit={handleLogin} className="space-y-4">
-            <div>
-              <label className="block text-sm font-medium text-text-muted mb-1">Admin Password</label>
+          <h1 className="text-4xl font-black text-text">CMS login</h1>
+          <p className="mt-3 text-text-muted">Manage the work pieces that appear in the portfolio slider and case-study sections.</p>
+          <form onSubmit={handleLogin} className="mt-8 space-y-4">
+            <label className="block text-sm font-bold text-text-muted">
+              Admin password
               <input
                 type="password"
                 value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                className="w-full px-4 py-3 rounded-xl border border-glass-border bg-background text-text focus:outline-none focus:ring-2 focus:ring-primary/20 transition-all"
-                placeholder="••••••••"
+                onChange={(event) => setPassword(event.target.value)}
+                className="mt-2 w-full rounded-2xl border border-glass-border bg-background px-4 py-3 text-text outline-none focus:border-primary"
+                placeholder="Enter password"
                 required
               />
-            </div>
-            <button
-              type="submit"
-              className="w-full bg-text text-background py-3 rounded-xl font-semibold hover:opacity-90 transition-colors"
-            >
-              Access Dashboard
+            </label>
+            {errorMessage && <p className="text-sm font-bold text-red-500">{errorMessage}</p>}
+            <button type="submit" className="w-full rounded-full bg-text px-6 py-4 text-sm font-black uppercase text-background">
+              Access dashboard
             </button>
           </form>
-        </motion.div>
+        </Motion.div>
       </div>
     );
   }
 
   return (
-    <div className="max-w-6xl mx-auto px-4 py-12 bg-background text-text transition-colors duration-300">
-      <div className="flex justify-between items-center mb-12">
-        <div>
-          <h1 className="text-4xl font-bold text-text">CMS Dashboard</h1>
-          <p className="text-text-muted mt-2">Manage your portfolio projects</p>
+    <div className="min-h-screen bg-background px-4 pb-20 pt-28 text-text sm:px-6 lg:px-8">
+      <div className="mx-auto max-w-[1500px]">
+        <div className="mb-10 flex flex-col gap-6 border-b border-glass-border pb-8 md:flex-row md:items-end md:justify-between">
+          <div>
+            <p className="text-sm font-black uppercase text-primary">Portfolio CMS</p>
+            <h1 className="mt-2 text-5xl font-black leading-none md:text-7xl">Manage work</h1>
+            <p className="mt-3 max-w-2xl text-text-muted">Add, edit, upload, delete, and order the portfolio pieces used by the homepage slider.</p>
+          </div>
+          <div className="flex flex-wrap gap-3">
+            <button
+              onClick={() => {
+                setCurrentProject(emptyProject());
+                setIsEditing(true);
+              }}
+              className="inline-flex items-center gap-2 rounded-full bg-primary px-5 py-3 text-sm font-black uppercase text-background"
+            >
+              <Plus size={18} /> Add work
+            </button>
+            <button
+              onClick={handleLogout}
+              className="inline-flex items-center gap-2 rounded-full border border-glass-border px-5 py-3 text-sm font-black uppercase text-text"
+            >
+              <LogOut size={18} /> Logout
+            </button>
+          </div>
         </div>
-        <div className="flex gap-4">
-          <button
-            onClick={() => {
-              setCurrentProject({ title: '', role: '', year: new Date().getFullYear().toString(), description: '', imageUrl: '', behanceLink: '', tags: [] });
-              setIsEditing(true);
-            }}
-            className="flex items-center gap-2 bg-primary text-background px-6 py-3 rounded-xl font-semibold hover:bg-primary/90 transition-all shadow-lg shadow-primary/10"
-          >
-            <Plus size={20} /> Add Project
-          </button>
-          <button
-            onClick={handleLogout}
-            className="flex items-center gap-2 border border-glass-border px-6 py-3 rounded-xl font-semibold hover:bg-surface transition-all text-text"
-          >
-            <LogOut size={20} /> Logout
-          </button>
-        </div>
-      </div>
 
-      {statusMessage && (
-        <motion.div 
-          initial={{ opacity: 0, y: -20 }}
-          animate={{ opacity: 1, y: 0 }}
-          className="mb-8 p-4 bg-green-50 text-green-700 rounded-xl border border-green-100 text-center font-medium"
-        >
-          {statusMessage}
-        </motion.div>
-      )}
+        {(statusMessage || errorMessage) && (
+          <div className={`mb-6 rounded-2xl px-4 py-3 text-sm font-bold ${statusMessage ? 'bg-green-50 text-green-700' : 'bg-red-50 text-red-700'}`}>
+            {statusMessage || errorMessage}
+          </div>
+        )}
 
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-        {projects.map((project) => (
-          <motion.div
-            key={project.id}
-            layout
-            className="bg-surface rounded-xl border border-glass-border overflow-hidden shadow-sm hover:shadow-md transition-shadow group"
-          >
-            <div className="h-48 overflow-hidden relative">
-              <img 
-                src={project.imageUrl} 
-                alt={project.title} 
-                className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-              />
-              <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center gap-3">
+        <div className="grid gap-4">
+          {sortedProjects.map((project, index) => (
+            <Motion.div
+              key={project.id}
+              layout
+              className="grid gap-4 rounded-[24px] border border-glass-border bg-surface p-4 md:grid-cols-[170px_1fr_auto] md:items-center"
+            >
+              <div className="aspect-[4/3] overflow-hidden rounded-[18px] bg-background">
+                {project.imageUrl && <img src={project.imageUrl} alt={project.title} className="h-full w-full object-cover" />}
+              </div>
+              <div>
+                <p className="text-xs font-black uppercase text-text-muted">{project.year} / {project.role}</p>
+                <h2 className="mt-2 text-3xl font-black leading-none">{project.title}</h2>
+                <p className="mt-3 max-w-2xl text-sm leading-relaxed text-text-muted">{project.description}</p>
+                <div className="mt-3 flex flex-wrap gap-2">
+                  {project.tags.map((tag) => (
+                    <span key={tag} className="rounded-full border border-glass-border px-3 py-1 text-[11px] font-bold uppercase text-text-muted">
+                      {tag}
+                    </span>
+                  ))}
+                </div>
+              </div>
+              <div className="flex flex-wrap gap-2 md:justify-end">
+                <button onClick={() => moveProject(project.id, -1)} className="grid h-11 w-11 place-items-center rounded-full border border-glass-border" aria-label="Move up" disabled={index === 0}>
+                  <GripVertical size={18} />
+                </button>
+                <button onClick={() => moveProject(project.id, 1)} className="grid h-11 w-11 place-items-center rounded-full border border-glass-border" aria-label="Move down" disabled={index === projects.length - 1}>
+                  <GripVertical size={18} />
+                </button>
                 <button
                   onClick={() => {
                     setCurrentProject(project);
                     setIsEditing(true);
                   }}
-                  className="p-3 bg-white rounded-full text-black hover:bg-gray-100 transition-colors"
+                  className="grid h-11 w-11 place-items-center rounded-full bg-text text-background"
+                  aria-label="Edit project"
                 >
-                  <Edit2 size={20} />
+                  <Edit2 size={18} />
                 </button>
-                <button
-                  onClick={() => handleDeleteProject(project.id)}
-                  className="p-3 bg-red-500 rounded-full text-white hover:bg-red-600 transition-colors"
-                >
-                  <Trash2 size={20} />
+                <button onClick={() => handleDeleteProject(project.id)} className="grid h-11 w-11 place-items-center rounded-full bg-red-500 text-white" aria-label="Delete project">
+                  <Trash2 size={18} />
                 </button>
               </div>
-            </div>
-            <div className="p-6">
-              <div className="text-xs font-semibold text-text-muted uppercase tracking-wider mb-2">{project.year} • {project.role}</div>
-              <h3 className="text-xl font-bold text-text mb-2">{project.title}</h3>
-              <div className="flex flex-wrap gap-2">
-                {project.tags.slice(0, 3).map(tag => (
-                  <span key={tag} className="text-[10px] bg-background px-2 py-1 rounded-full font-medium text-text-muted capitalize border border-glass-border">
-                    {tag}
-                  </span>
-                ))}
-              </div>
-            </div>
-          </motion.div>
-        ))}
+            </Motion.div>
+          ))}
+        </div>
       </div>
 
       <AnimatePresence>
         {isEditing && (
-          <div className="fixed inset-0 bg-black/60 backdrop-blur-sm z-50 flex items-center justify-center p-4">
-            <motion.div
-              initial={{ opacity: 0, scale: 0.95 }}
+          <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 p-4 backdrop-blur-sm">
+            <Motion.div
+              initial={{ opacity: 0, scale: 0.96 }}
               animate={{ opacity: 1, scale: 1 }}
-              exit={{ opacity: 0, scale: 0.95 }}
-              className="bg-surface rounded-xl w-full max-w-2xl max-h-[90vh] overflow-y-auto border border-glass-border"
+              exit={{ opacity: 0, scale: 0.96 }}
+              className="max-h-[92vh] w-full max-w-4xl overflow-y-auto rounded-[28px] border border-glass-border bg-background"
             >
-              <div className="p-8 border-b border-glass-border flex justify-between items-center sticky top-0 bg-surface/80 backdrop-blur-md z-10">
-                <h2 className="text-2xl font-bold text-text">{currentProject.id ? 'Edit Project' : 'New Project'}</h2>
-                <button onClick={() => setIsEditing(false)} className="text-text-muted hover:text-text">
-                  <X size={24} />
+              <div className="sticky top-0 z-10 flex items-center justify-between border-b border-glass-border bg-background/90 p-6 backdrop-blur-xl">
+                <h2 className="text-3xl font-black">{currentProject.id ? 'Edit work' : 'New work'}</h2>
+                <button onClick={() => setIsEditing(false)} className="grid h-10 w-10 place-items-center rounded-full border border-glass-border">
+                  <X size={20} />
                 </button>
               </div>
 
-              <form onSubmit={handleSaveProject} className="p-8 space-y-6">
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                  <div className="space-y-4">
-                    <div>
-                      <label className="block text-sm font-medium text-text-muted mb-1">Project Title</label>
-                      <input
-                        type="text"
-                        value={currentProject.title}
-                        onChange={(e) => setCurrentProject({ ...currentProject, title: e.target.value })}
-                        className="w-full px-4 py-2 rounded-xl border border-glass-border bg-background text-text focus:outline-none focus:ring-2 focus:ring-primary/20"
-                        required
-                      />
-                    </div>
-                    <div>
-                      <label className="block text-sm font-medium text-text-muted mb-1">Role</label>
+              <form onSubmit={handleSaveProject} className="grid gap-6 p-6 lg:grid-cols-[1fr_0.85fr]">
+                <div className="space-y-4">
+                  <label className="block text-sm font-bold text-text-muted">
+                    Project title
+                    <input
+                      type="text"
+                      value={currentProject.title}
+                      onChange={(event) => setCurrentProject({ ...currentProject, title: event.target.value })}
+                      className="mt-2 w-full rounded-2xl border border-glass-border bg-surface px-4 py-3 text-text outline-none focus:border-primary"
+                      required
+                    />
+                  </label>
+                  <div className="grid gap-4 md:grid-cols-3">
+                    <label className="block text-sm font-bold text-text-muted">
+                      Role
                       <input
                         type="text"
                         value={currentProject.role}
-                        onChange={(e) => setCurrentProject({ ...currentProject, role: e.target.value })}
-                        className="w-full px-4 py-2 rounded-xl border border-glass-border bg-background text-text focus:outline-none focus:ring-2 focus:ring-primary/20"
+                        onChange={(event) => setCurrentProject({ ...currentProject, role: event.target.value })}
+                        className="mt-2 w-full rounded-2xl border border-glass-border bg-surface px-4 py-3 text-text outline-none focus:border-primary"
                         required
                       />
-                    </div>
-                    <div>
-                      <label className="block text-sm font-medium text-text-muted mb-1">Year</label>
+                    </label>
+                    <label className="block text-sm font-bold text-text-muted">
+                      Industry
+                      <input
+                        type="text"
+                        value={currentProject.industry}
+                        onChange={(event) => setCurrentProject({ ...currentProject, industry: event.target.value })}
+                        className="mt-2 w-full rounded-2xl border border-glass-border bg-surface px-4 py-3 text-text outline-none focus:border-primary"
+                      />
+                    </label>
+                    <label className="block text-sm font-bold text-text-muted">
+                      Year
                       <input
                         type="text"
                         value={currentProject.year}
-                        onChange={(e) => setCurrentProject({ ...currentProject, year: e.target.value })}
-                        className="w-full px-4 py-2 rounded-xl border border-glass-border bg-background text-text focus:outline-none focus:ring-2 focus:ring-primary/20"
+                        onChange={(event) => setCurrentProject({ ...currentProject, year: event.target.value })}
+                        className="mt-2 w-full rounded-2xl border border-glass-border bg-surface px-4 py-3 text-text outline-none focus:border-primary"
                         required
                       />
-                    </div>
-                    <div>
-                      <label className="block text-sm font-medium text-text-muted mb-1">Behance Link</label>
-                      <input
-                        type="url"
-                        value={currentProject.behanceLink}
-                        onChange={(e) => setCurrentProject({ ...currentProject, behanceLink: e.target.value })}
-                        className="w-full px-4 py-2 rounded-xl border border-glass-border bg-background text-text focus:outline-none focus:ring-2 focus:ring-primary/20"
-                      />
-                    </div>
+                    </label>
                   </div>
-
-                  <div className="space-y-4">
-                    <div>
-                      <label className="block text-sm font-medium text-text-muted mb-1">Project Image</label>
-                      <div 
-                        className="relative h-40 rounded-xl border-2 border-dashed border-glass-border overflow-hidden flex flex-col items-center justify-center bg-background group hover:bg-surface transition-colors cursor-pointer"
-                        onClick={() => document.getElementById('imageUpload').click()}
-                      >
-                        {currentProject.imageUrl ? (
-                          <img src={currentProject.imageUrl} className="w-full h-full object-cover" alt="Preview" />
-                        ) : (
-                          <div className="text-center">
-                            <Upload className="mx-auto text-text-muted mb-2" />
-                            <span className="text-xs text-text-muted font-medium">Click to upload image</span>
-                          </div>
-                        )}
-                        <input 
-                          id="imageUpload"
-                          type="file" 
-                          hidden 
-                          onChange={handleFileUpload}
-                          accept="image/*"
-                        />
-                      </div>
-                    </div>
-                    <div>
-                      <label className="block text-sm font-medium text-text-muted mb-1">Tags (comma separated)</label>
-                      <input
-                        type="text"
-                        value={currentProject.tags.join(', ')}
-                        onChange={(e) => setCurrentProject({ ...currentProject, tags: e.target.value.split(',').map(t => t.trim()) })}
-                        className="w-full px-4 py-2 rounded-xl border border-glass-border bg-background text-text focus:outline-none focus:ring-2 focus:ring-primary/20"
-                        placeholder="UI Design, Web, Mobile"
-                      />
-                    </div>
-                  </div>
+                  <label className="block text-sm font-bold text-text-muted">
+                    Case link
+                    <input
+                      type="url"
+                      value={currentProject.behanceLink}
+                      onChange={(event) => setCurrentProject({ ...currentProject, behanceLink: event.target.value })}
+                      className="mt-2 w-full rounded-2xl border border-glass-border bg-surface px-4 py-3 text-text outline-none focus:border-primary"
+                      placeholder="https://www.behance.net/..."
+                    />
+                  </label>
+                  <label className="block text-sm font-bold text-text-muted">
+                    Tags
+                    <input
+                      type="text"
+                      value={currentProject.tags.join(', ')}
+                      onChange={(event) => setCurrentProject({ ...currentProject, tags: event.target.value.split(',').map((tag) => tag.trim()) })}
+                      className="mt-2 w-full rounded-2xl border border-glass-border bg-surface px-4 py-3 text-text outline-none focus:border-primary"
+                      placeholder="Web design, UX, Branding"
+                    />
+                  </label>
+                  <label className="block text-sm font-bold text-text-muted">
+                    Description
+                    <textarea
+                      rows="7"
+                      value={currentProject.description}
+                      onChange={(event) => setCurrentProject({ ...currentProject, description: event.target.value })}
+                      className="mt-2 w-full rounded-2xl border border-glass-border bg-surface px-4 py-3 text-text outline-none focus:border-primary"
+                      required
+                    />
+                  </label>
                 </div>
 
-                <div>
-                  <label className="block text-sm font-medium text-text-muted mb-1">Description</label>
-                  <textarea
-                    rows="4"
-                    value={currentProject.description}
-                    onChange={(e) => setCurrentProject({ ...currentProject, description: e.target.value })}
-                    className="w-full px-4 py-2 rounded-xl border border-glass-border bg-background text-text focus:outline-none focus:ring-2 focus:ring-primary/20"
-                    required
-                  ></textarea>
-                </div>
-
-                <div className="flex gap-4 pt-4">
+                <div className="space-y-4">
+                  <div>
+                    <p className="mb-2 text-sm font-bold text-text-muted">Portfolio image</p>
+                    <button
+                      type="button"
+                      onClick={() => document.getElementById('imageUpload')?.click()}
+                      className="relative flex aspect-[4/3] w-full items-center justify-center overflow-hidden rounded-[24px] border border-dashed border-glass-border bg-surface"
+                    >
+                      {currentProject.imageUrl ? (
+                        <img src={currentProject.imageUrl} className="h-full w-full object-cover" alt="Preview" />
+                      ) : (
+                        <span className="flex flex-col items-center gap-3 text-sm font-black uppercase text-text-muted">
+                          <Upload size={28} />
+                          Upload image
+                        </span>
+                      )}
+                    </button>
+                    <input id="imageUpload" type="file" hidden onChange={handleFileUpload} accept="image/*" />
+                  </div>
+                  <label className="block text-sm font-bold text-text-muted">
+                    Or paste image URL
+                    <input
+                      type="url"
+                      value={currentProject.imageUrl}
+                      onChange={(event) => setCurrentProject({ ...currentProject, imageUrl: event.target.value })}
+                      className="mt-2 w-full rounded-2xl border border-glass-border bg-surface px-4 py-3 text-text outline-none focus:border-primary"
+                      placeholder="https://..."
+                    />
+                  </label>
                   <button
                     type="submit"
                     disabled={loading}
-                    className="flex-1 bg-text text-background py-4 rounded-xl font-bold flex items-center justify-center gap-2 hover:opacity-90 transition-all disabled:opacity-50 shadow-xl shadow-primary/10"
+                    className="inline-flex w-full items-center justify-center gap-2 rounded-full bg-text px-6 py-4 text-sm font-black uppercase text-background disabled:opacity-50"
                   >
-                    {loading ? 'Saving...' : <><Save size={20} /> Save Project</>}
-                  </button>
-                  <button
-                    type="button"
-                    onClick={() => setIsEditing(false)}
-                    className="flex-1 border border-glass-border text-text py-4 rounded-xl font-bold hover:bg-surface transition-all"
-                  >
-                    Cancel
+                    <Save size={18} />
+                    {loading ? 'Saving' : 'Save work'}
                   </button>
                 </div>
               </form>
-            </motion.div>
+            </Motion.div>
           </div>
         )}
       </AnimatePresence>
