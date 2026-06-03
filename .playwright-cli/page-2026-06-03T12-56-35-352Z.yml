@@ -1,0 +1,240 @@
+- generic [ref=e3]:
+  - navigation [ref=e4]:
+    - generic [ref=e5]:
+      - generic [ref=e6]:
+        - link "yemi." [ref=e7] [cursor=pointer]:
+          - /url: /
+        - button "Toggle theme" [ref=e8] [cursor=pointer]:
+          - img [ref=e9]
+      - button "Open menu" [ref=e11] [cursor=pointer]:
+        - img [ref=e12]
+  - main [ref=e13]:
+    - generic [ref=e14]:
+      - generic [ref=e16]:
+        - generic [ref=e17]:
+          - generic [ref=e18]:
+            - generic [ref=e19]:
+              - generic [ref=e20]: + Product design
+              - generic [ref=e21]: + UI
+              - generic [ref=e22]: + UX
+              - generic [ref=e23]: + Apps
+              - generic [ref=e24]: + Websites
+              - generic [ref=e25]: + London / Remote
+            - heading "Designs powered by research and experience" [level=1] [ref=e26]
+          - generic [ref=e27]:
+            - paragraph [ref=e28]: I'm a Senior UX/Product Designer with 10+ years of experience designing digital products that solve real user problems and deliver measurable business results. Having worked with top companies and innovative startups, I combine user research, product strategy, and intuitive UI design to transform complex challenges into seamless experiences. from discovery and prototyping to testing and delivery.
+            - link "Lets chat" [ref=e29] [cursor=pointer]:
+              - /url: mailto:yemi_aiyeola@hotmail.com
+              - text: Lets chat
+              - img [ref=e30]
+        - generic [ref=e36]:
+          - link "Fintech Mobile App 2024 Fintech Mobile App" [ref=e37] [cursor=pointer]:
+            - /url: /project/1
+            - img "Fintech Mobile App" [ref=e38]
+            - generic [ref=e40]:
+              - paragraph [ref=e41]: "2024"
+              - heading "Fintech Mobile App" [level=2] [ref=e42]
+          - link "E-Commerce Experience 2023 E-Commerce Experience" [ref=e43] [cursor=pointer]:
+            - /url: /project/2
+            - img "E-Commerce Experience" [ref=e44]
+            - generic [ref=e46]:
+              - paragraph [ref=e47]: "2023"
+              - heading "E-Commerce Experience" [level=2] [ref=e48]
+          - link "Healthcare Dashboard 2023 Healthcare Dashboard" [ref=e49] [cursor=pointer]:
+            - /url: /project/3
+            - img "Healthcare Dashboard" [ref=e50]
+            - generic [ref=e52]:
+              - paragraph [ref=e53]: "2023"
+              - heading "Healthcare Dashboard" [level=2] [ref=e54]
+          - link "Smart Home Hub 2022 Smart Home Hub" [ref=e55] [cursor=pointer]:
+            - /url: /project/4
+            - img "Smart Home Hub" [ref=e56]
+            - generic [ref=e58]:
+              - paragraph [ref=e59]: "2022"
+              - heading "Smart Home Hub" [level=2] [ref=e60]
+          - link "Fintech Mobile App 2024 Fintech Mobile App" [ref=e61] [cursor=pointer]:
+            - /url: /project/1
+            - img "Fintech Mobile App" [ref=e62]
+            - generic [ref=e64]:
+              - paragraph [ref=e65]: "2024"
+              - heading "Fintech Mobile App" [level=2] [ref=e66]
+          - link "E-Commerce Experience 2023 E-Commerce Experience" [ref=e67] [cursor=pointer]:
+            - /url: /project/2
+            - img "E-Commerce Experience" [ref=e68]
+            - generic [ref=e70]:
+              - paragraph [ref=e71]: "2023"
+              - heading "E-Commerce Experience" [level=2] [ref=e72]
+          - link "Healthcare Dashboard 2023 Healthcare Dashboard" [ref=e73] [cursor=pointer]:
+            - /url: /project/3
+            - img "Healthcare Dashboard" [ref=e74]
+            - generic [ref=e76]:
+              - paragraph [ref=e77]: "2023"
+              - heading "Healthcare Dashboard" [level=2] [ref=e78]
+          - link "Smart Home Hub 2022 Smart Home Hub" [ref=e79] [cursor=pointer]:
+            - /url: /project/4
+            - img "Smart Home Hub" [ref=e80]
+            - generic [ref=e82]:
+              - paragraph [ref=e83]: "2022"
+              - heading "Smart Home Hub" [level=2] [ref=e84]
+      - generic [ref=e87]:
+        - generic [ref=e88]:
+          - generic [ref=e89]:
+            - heading "Selected work" [level=2] [ref=e90]
+            - paragraph [ref=e91]: Just a snapshot of the many projects over the years.
+          - link "View all on Behance" [ref=e92] [cursor=pointer]:
+            - /url: https://www.behance.net/yemiui
+        - generic [ref=e93]:
+          - article [ref=e94]:
+            - link "Fintech Mobile App" [ref=e95] [cursor=pointer]:
+              - /url: /project/1
+              - img "Fintech Mobile App" [ref=e96]
+              - img [ref=e99]
+            - generic [ref=e102]:
+              - generic [ref=e103]:
+                - generic [ref=e104]: "01"
+                - generic [ref=e105]: "2024"
+              - heading "Fintech Mobile App" [level=3] [ref=e106]
+              - paragraph [ref=e107]: A comprehensive redesign of a consumer fintech application, focusing on simplified money transfers and clear financial insights.
+              - generic [ref=e108]:
+                - generic [ref=e109]:
+                  - paragraph [ref=e110]: Role
+                  - paragraph [ref=e111]: Lead Product Designer
+                - generic [ref=e112]:
+                  - paragraph [ref=e113]: Industry
+                  - paragraph [ref=e114]: Fintech
+              - generic [ref=e115]:
+                - generic [ref=e116]: UX Research
+                - generic [ref=e117]: UI Design
+                - generic [ref=e118]: Prototyping
+              - link "Open case" [ref=e119] [cursor=pointer]:
+                - /url: /project/1
+                - text: Open case
+                - img [ref=e120]
+          - article [ref=e123]:
+            - link "E-Commerce Experience" [ref=e124] [cursor=pointer]:
+              - /url: /project/2
+              - img "E-Commerce Experience" [ref=e125]
+              - img [ref=e128]
+            - generic [ref=e131]:
+              - generic [ref=e132]:
+                - generic [ref=e133]: "02"
+                - generic [ref=e134]: "2023"
+              - heading "E-Commerce Experience" [level=3] [ref=e135]
+              - paragraph [ref=e136]: Optimized the checkout flow and user experience for an emerging fashion e-commerce brand, increasing conversion rates by 25%.
+              - generic [ref=e137]:
+                - generic [ref=e138]:
+                  - paragraph [ref=e139]: Role
+                  - paragraph [ref=e140]: UX/UI Designer
+                - generic [ref=e141]:
+                  - paragraph [ref=e142]: Industry
+                  - paragraph [ref=e143]: Retail
+              - generic [ref=e144]:
+                - generic [ref=e145]: Web Design
+                - generic [ref=e146]: Interaction Design
+                - generic [ref=e147]: E-commerce
+              - link "Open case" [ref=e148] [cursor=pointer]:
+                - /url: /project/2
+                - text: Open case
+                - img [ref=e149]
+          - article [ref=e152]:
+            - link "Healthcare Dashboard" [ref=e153] [cursor=pointer]:
+              - /url: /project/3
+              - img "Healthcare Dashboard" [ref=e154]
+              - img [ref=e157]
+            - generic [ref=e160]:
+              - generic [ref=e161]:
+                - generic [ref=e162]: "03"
+                - generic [ref=e163]: "2023"
+              - heading "Healthcare Dashboard" [level=3] [ref=e164]
+              - paragraph [ref=e165]: Designed an intuitive dashboard for healthcare professionals to monitor patient data and manage appointments efficiently.
+              - generic [ref=e166]:
+                - generic [ref=e167]:
+                  - paragraph [ref=e168]: Role
+                  - paragraph [ref=e169]: Product Designer
+                - generic [ref=e170]:
+                  - paragraph [ref=e171]: Industry
+                  - paragraph [ref=e172]: Healthcare
+              - generic [ref=e173]:
+                - generic [ref=e174]: SaaS UI
+                - generic [ref=e175]: Dashboard
+                - generic [ref=e176]: Data Visualization
+              - link "Open case" [ref=e177] [cursor=pointer]:
+                - /url: /project/3
+                - text: Open case
+                - img [ref=e178]
+          - article [ref=e181]:
+            - link "Smart Home Hub" [ref=e182] [cursor=pointer]:
+              - /url: /project/4
+              - img "Smart Home Hub" [ref=e183]
+              - img [ref=e186]
+            - generic [ref=e189]:
+              - generic [ref=e190]:
+                - generic [ref=e191]: "04"
+                - generic [ref=e192]: "2022"
+              - heading "Smart Home Hub" [level=3] [ref=e193]
+              - paragraph [ref=e194]: A dark-mode focused application controlling IoT smart home devices with seamless onboarding and intuitive controls.
+              - generic [ref=e195]:
+                - generic [ref=e196]:
+                  - paragraph [ref=e197]: Role
+                  - paragraph [ref=e198]: UX Designer
+                - generic [ref=e199]:
+                  - paragraph [ref=e200]: Industry
+                  - paragraph [ref=e201]: IoT
+              - generic [ref=e202]:
+                - generic [ref=e203]: Mobile App
+                - generic [ref=e204]: IoT
+                - generic [ref=e205]: Dark Mode
+              - link "Open case" [ref=e206] [cursor=pointer]:
+                - /url: /project/4
+                - text: Open case
+                - img [ref=e207]
+      - generic [ref=e211]:
+        - paragraph [ref=e213]: Process
+        - generic [ref=e214]:
+          - article [ref=e215]:
+            - paragraph [ref=e216]: "01"
+            - heading "Understand the Mission" [level=2] [ref=e217]
+            - paragraph [ref=e218]: Every successful product starts with understanding the problem before designing a solution. At the beginning of a project, I work closely with stakeholders to understand business objectives, user needs, technical constraints, and success metrics. I review existing products, analyse competitors, and identify opportunities within the market. This discovery phase ensures that design decisions are aligned with both business goals and user expectations from the very start.
+          - article [ref=e219]:
+            - paragraph [ref=e220]: "02"
+            - heading "Research the Users" [level=2] [ref=e221]
+            - paragraph [ref=e222]: Once the objectives are clear, I focus on understanding the people who will use the product. Through user interviews, surveys, workshops, analytics reviews, and competitor analysis, I gather insights into user behaviours, motivations, frustrations, and goals. This research helps uncover real user needs and prevents assumptions from driving design decisions. The findings are then synthesised into personas, user needs, and key opportunities for improvement.
+          - article [ref=e223]:
+            - paragraph [ref=e224]: "03"
+            - heading "Map the Experience" [level=2] [ref=e225]
+            - paragraph [ref=e226]: Using the insights gathered during research, I begin structuring the overall experience. This involves creating user journeys, task flows, information architecture, and user stories that map how users will interact with the product. By visualising the user's path from start to finish, I can identify pain points, remove unnecessary complexity, and ensure that the experience is intuitive and easy to navigate.
+          - article [ref=e227]:
+            - paragraph [ref=e228]: "04"
+            - heading "Sketch and Wireframe" [level=2] [ref=e229]
+            - paragraph [ref=e230]: Before investing time in visual design, I explore ideas through low-fidelity sketches and wireframes. This stage focuses on layout, content hierarchy, navigation, and functionality without the distraction of colours or branding. Wireframing allows me to rapidly test concepts, gather feedback, and iterate on solutions while ensuring that the product's structure supports user goals effectively.
+          - article [ref=e231]:
+            - paragraph [ref=e232]: "05"
+            - heading "Design the Interface" [level=2] [ref=e233]
+            - paragraph [ref=e234]: With a validated structure in place, I move into high-fidelity UI design. This is where the product begins to take shape visually through the application of typography, colour systems, spacing, imagery, and reusable components. I create interfaces that are not only visually appealing but also accessible, consistent, and scalable. Design systems and component libraries are often used to ensure efficiency and maintain consistency across the product.
+          - article [ref=e235]:
+            - paragraph [ref=e236]: "06"
+            - heading "Prototype the Experience" [level=2] [ref=e237]
+            - paragraph [ref=e238]: To bring the design to life, I create interactive prototypes that simulate the final user experience. Prototypes allow stakeholders, developers, and users to interact with the product before development begins. This stage helps validate user flows, test interactions, communicate design intent, and identify potential usability issues early, reducing costly changes later in the project lifecycle.
+          - article [ref=e239]:
+            - paragraph [ref=e240]: "07"
+            - heading "Test, Learn and Improve" [level=2] [ref=e241]
+            - paragraph [ref=e242]: Design is an iterative process, and testing plays a critical role in ensuring the final solution meets user needs. Through usability testing sessions, stakeholder reviews, accessibility checks, and feedback gathering, I evaluate how users interact with the product. The insights collected are used to refine the design, address friction points, and improve the overall user experience. This cycle of testing and iteration continues until the solution performs effectively for both users and the business.
+          - article [ref=e243]:
+            - paragraph [ref=e244]: "08"
+            - heading "Handoff and Support Development" [level=2] [ref=e245]
+            - paragraph [ref=e246]: Once the design is validated, I prepare detailed specifications, documentation, and assets for development. I work closely with engineers throughout implementation, providing guidance, answering questions, and conducting quality assurance reviews to ensure the final product reflects the intended design. My involvement continues beyond handoff to help maintain design quality and identify opportunities for future improvements after launch.
+  - contentinfo [ref=e247]:
+    - generic [ref=e248]:
+      - generic [ref=e249]:
+        - paragraph [ref=e250]: Available for new work
+        - heading "Let's make the next piece worth scrolling for." [level=2] [ref=e251]:
+          - generic [ref=e252]: Let's make the next
+          - generic [ref=e253]: piece worth scrolling for.
+      - generic [ref=e254]:
+        - link "Behance" [ref=e255] [cursor=pointer]:
+          - /url: https://www.behance.net/yemiui
+        - link "LinkedIn" [ref=e256] [cursor=pointer]:
+          - /url: https://www.linkedin.com/in/yemi-aiyeola-598a9a225/
+        - link "Email" [ref=e257] [cursor=pointer]:
+          - /url: mailto:yemi_aiyeola@hotmail.com
+      - paragraph [ref=e258]: © 2026 Yemi

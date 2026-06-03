@@ -1,0 +1,214 @@
+- generic [ref=e3]:
+  - navigation [ref=e4]:
+    - generic [ref=e5]:
+      - generic [ref=e6]:
+        - link "yemi." [ref=e7] [cursor=pointer]:
+          - /url: /
+        - button "Toggle theme" [ref=e8] [cursor=pointer]:
+          - img [ref=e9]
+      - generic [ref=e11]:
+        - link "Work" [ref=e12] [cursor=pointer]:
+          - /url: /#work
+        - link "Process" [ref=e13] [cursor=pointer]:
+          - /url: /#process
+        - link "Contact" [ref=e14] [cursor=pointer]:
+          - /url: /#contact
+      - link "Start a project" [ref=e16] [cursor=pointer]:
+        - /url: mailto:hello@yemi.design
+        - text: Start a project
+        - img [ref=e17]
+  - main [ref=e20]:
+    - generic [ref=e21]:
+      - generic [ref=e23]:
+        - generic [ref=e24]:
+          - generic [ref=e25]:
+            - generic [ref=e26]:
+              - generic [ref=e27]: + Product design
+              - generic [ref=e28]: + Websites
+              - generic [ref=e29]: + London / Remote
+            - heading "Digital products and sharp websites for ambitious brands." [level=1] [ref=e30]
+          - generic [ref=e31]:
+            - paragraph [ref=e32]: I am Yemi, a product designer building clean interfaces, launch-ready websites, and portfolio pieces that move with purpose.
+            - link "View work" [ref=e33] [cursor=pointer]:
+              - /url: "#work"
+              - text: View work
+              - img [ref=e34]
+        - generic [ref=e40]:
+          - link "Fintech Mobile App 2024 Fintech Mobile App" [ref=e41] [cursor=pointer]:
+            - /url: /project/1
+            - img "Fintech Mobile App" [ref=e42]
+            - generic [ref=e44]:
+              - paragraph [ref=e45]: "2024"
+              - heading "Fintech Mobile App" [level=2] [ref=e46]
+          - link "E-Commerce Experience 2023 E-Commerce Experience" [ref=e47] [cursor=pointer]:
+            - /url: /project/2
+            - img "E-Commerce Experience" [ref=e48]
+            - generic [ref=e50]:
+              - paragraph [ref=e51]: "2023"
+              - heading "E-Commerce Experience" [level=2] [ref=e52]
+          - link "Healthcare Dashboard 2023 Healthcare Dashboard" [ref=e53] [cursor=pointer]:
+            - /url: /project/3
+            - img "Healthcare Dashboard" [ref=e54]
+            - generic [ref=e56]:
+              - paragraph [ref=e57]: "2023"
+              - heading "Healthcare Dashboard" [level=2] [ref=e58]
+          - link "Smart Home Hub 2022 Smart Home Hub" [ref=e59] [cursor=pointer]:
+            - /url: /project/4
+            - img "Smart Home Hub" [ref=e60]
+            - generic [ref=e62]:
+              - paragraph [ref=e63]: "2022"
+              - heading "Smart Home Hub" [level=2] [ref=e64]
+          - link "Fintech Mobile App 2024 Fintech Mobile App" [ref=e65] [cursor=pointer]:
+            - /url: /project/1
+            - img "Fintech Mobile App" [ref=e66]
+            - generic [ref=e68]:
+              - paragraph [ref=e69]: "2024"
+              - heading "Fintech Mobile App" [level=2] [ref=e70]
+          - link "E-Commerce Experience 2023 E-Commerce Experience" [ref=e71] [cursor=pointer]:
+            - /url: /project/2
+            - img "E-Commerce Experience" [ref=e72]
+            - generic [ref=e74]:
+              - paragraph [ref=e75]: "2023"
+              - heading "E-Commerce Experience" [level=2] [ref=e76]
+          - link "Healthcare Dashboard 2023 Healthcare Dashboard" [ref=e77] [cursor=pointer]:
+            - /url: /project/3
+            - img "Healthcare Dashboard" [ref=e78]
+            - generic [ref=e80]:
+              - paragraph [ref=e81]: "2023"
+              - heading "Healthcare Dashboard" [level=2] [ref=e82]
+          - link "Smart Home Hub 2022 Smart Home Hub" [ref=e83] [cursor=pointer]:
+            - /url: /project/4
+            - img "Smart Home Hub" [ref=e84]
+            - generic [ref=e86]:
+              - paragraph [ref=e87]: "2022"
+              - heading "Smart Home Hub" [level=2] [ref=e88]
+      - generic [ref=e91]:
+        - generic [ref=e92]:
+          - generic [ref=e93]:
+            - heading "Selected work" [level=2] [ref=e94]
+            - paragraph [ref=e95]: Uploaded CMS projects become the hero slider and the case-study flow below.
+          - link "View all on Behance" [ref=e96] [cursor=pointer]:
+            - /url: https://www.behance.net/yemiui
+        - generic [ref=e97]:
+          - article [ref=e98]:
+            - link "Fintech Mobile App" [ref=e99] [cursor=pointer]:
+              - /url: /project/1
+              - img "Fintech Mobile App" [ref=e100]
+              - img [ref=e103]
+            - generic [ref=e106]:
+              - generic [ref=e107]:
+                - generic [ref=e108]: "01"
+                - generic [ref=e109]: "2024"
+              - heading "Fintech Mobile App" [level=3] [ref=e110]
+              - paragraph [ref=e111]: A comprehensive redesign of a consumer fintech application, focusing on simplified money transfers and clear financial insights.
+              - generic [ref=e112]:
+                - generic [ref=e113]:
+                  - paragraph [ref=e114]: Role
+                  - paragraph [ref=e115]: Lead Product Designer
+                - generic [ref=e116]:
+                  - paragraph [ref=e117]: Industry
+                  - paragraph [ref=e118]: Fintech
+              - generic [ref=e119]:
+                - generic [ref=e120]: UX Research
+                - generic [ref=e121]: UI Design
+                - generic [ref=e122]: Prototyping
+              - link "Open case" [ref=e123] [cursor=pointer]:
+                - /url: /project/1
+                - text: Open case
+                - img [ref=e124]
+          - article [ref=e127]:
+            - link "E-Commerce Experience" [ref=e128] [cursor=pointer]:
+              - /url: /project/2
+              - img "E-Commerce Experience" [ref=e129]
+              - img [ref=e132]
+            - generic [ref=e135]:
+              - generic [ref=e136]:
+                - generic [ref=e137]: "02"
+                - generic [ref=e138]: "2023"
+              - heading "E-Commerce Experience" [level=3] [ref=e139]
+              - paragraph [ref=e140]: Optimized the checkout flow and user experience for an emerging fashion e-commerce brand, increasing conversion rates by 25%.
+              - generic [ref=e141]:
+                - generic [ref=e142]:
+                  - paragraph [ref=e143]: Role
+                  - paragraph [ref=e144]: UX/UI Designer
+                - generic [ref=e145]:
+                  - paragraph [ref=e146]: Industry
+                  - paragraph [ref=e147]: Retail
+              - generic [ref=e148]:
+                - generic [ref=e149]: Web Design
+                - generic [ref=e150]: Interaction Design
+                - generic [ref=e151]: E-commerce
+              - link "Open case" [ref=e152] [cursor=pointer]:
+                - /url: /project/2
+                - text: Open case
+                - img [ref=e153]
+          - article [ref=e156]:
+            - link "Healthcare Dashboard" [ref=e157] [cursor=pointer]:
+              - /url: /project/3
+              - img "Healthcare Dashboard" [ref=e158]
+              - img [ref=e161]
+            - generic [ref=e164]:
+              - generic [ref=e165]:
+                - generic [ref=e166]: "03"
+                - generic [ref=e167]: "2023"
+              - heading "Healthcare Dashboard" [level=3] [ref=e168]
+              - paragraph [ref=e169]: Designed an intuitive dashboard for healthcare professionals to monitor patient data and manage appointments efficiently.
+              - generic [ref=e170]:
+                - generic [ref=e171]:
+                  - paragraph [ref=e172]: Role
+                  - paragraph [ref=e173]: Product Designer
+                - generic [ref=e174]:
+                  - paragraph [ref=e175]: Industry
+                  - paragraph [ref=e176]: Healthcare
+              - generic [ref=e177]:
+                - generic [ref=e178]: SaaS UI
+                - generic [ref=e179]: Dashboard
+                - generic [ref=e180]: Data Visualization
+              - link "Open case" [ref=e181] [cursor=pointer]:
+                - /url: /project/3
+                - text: Open case
+                - img [ref=e182]
+          - article [ref=e185]:
+            - link "Smart Home Hub" [ref=e186] [cursor=pointer]:
+              - /url: /project/4
+              - img "Smart Home Hub" [ref=e187]
+              - img [ref=e190]
+            - generic [ref=e193]:
+              - generic [ref=e194]:
+                - generic [ref=e195]: "04"
+                - generic [ref=e196]: "2022"
+              - heading "Smart Home Hub" [level=3] [ref=e197]
+              - paragraph [ref=e198]: A dark-mode focused application controlling IoT smart home devices with seamless onboarding and intuitive controls.
+              - generic [ref=e199]:
+                - generic [ref=e200]:
+                  - paragraph [ref=e201]: Role
+                  - paragraph [ref=e202]: UX Designer
+                - generic [ref=e203]:
+                  - paragraph [ref=e204]: Industry
+                  - paragraph [ref=e205]: IoT
+              - generic [ref=e206]:
+                - generic [ref=e207]: Mobile App
+                - generic [ref=e208]: IoT
+                - generic [ref=e209]: Dark Mode
+              - link "Open case" [ref=e210] [cursor=pointer]:
+                - /url: /project/4
+                - text: Open case
+                - img [ref=e211]
+      - generic [ref=e215]:
+        - paragraph [ref=e216]: Process
+        - generic [ref=e217]:
+          - paragraph [ref=e218]: Discovery, product direction, interface systems, and launch polish.
+          - paragraph [ref=e219]: "The work stays practical: clear user journeys, strong visual hierarchy, and a site that makes the portfolio piece easy to understand."
+  - contentinfo [ref=e220]:
+    - generic [ref=e221]:
+      - generic [ref=e222]:
+        - paragraph [ref=e223]: Available for new work
+        - heading "Let's make the next piece worth scrolling for." [level=2] [ref=e224]
+      - generic [ref=e225]:
+        - link "Behance" [ref=e226] [cursor=pointer]:
+          - /url: https://www.behance.net/yemiui
+        - link "Email" [ref=e227] [cursor=pointer]:
+          - /url: mailto:hello@yemi.design
+        - link "CMS" [ref=e228] [cursor=pointer]:
+          - /url: /admin
+      - paragraph [ref=e229]: © 2026 Yemi

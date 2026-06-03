@@ -14,7 +14,7 @@ const ProjectGrid = ({ projects = [] }) => {
             transition={{ duration: 0.6 }}
           >
             <h2 className="text-5xl font-black tracking-tight text-text md:text-7xl">Selected work</h2>
-            <p className="mt-3 text-lg text-text-muted">Uploaded CMS projects become the hero slider and the case-study flow below.</p>
+            <p className="mt-3 text-lg text-text-muted">Just a snapshot of the many projects over the years.</p>
           </Motion.div>
 
           <Motion.a

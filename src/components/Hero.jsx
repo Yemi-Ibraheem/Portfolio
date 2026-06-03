@@ -12,38 +12,41 @@ const Hero = ({ projects = [], isLoading }) => {
   };
 
   return (
-    <section className="relative flex min-h-[100svh] w-full flex-col justify-end overflow-hidden bg-background px-4 pb-4 pt-28 sm:px-6 lg:px-8">
+    <section className="relative flex min-h-[100svh] w-full flex-col justify-end overflow-hidden bg-background px-4 pb-4 pt-28 sm:px-6 lg:min-h-[82svh] lg:px-8 lg:pb-4 lg:pt-22">
       <div className="pointer-events-none absolute inset-x-0 top-0 h-28 bg-gradient-to-b from-background to-transparent" />
       <div className="mx-auto flex w-full max-w-[1500px] flex-1 flex-col justify-end">
         <Motion.div
-          className="grid gap-8 pb-7 md:grid-cols-[1fr_310px] md:items-end lg:grid-cols-[1fr_360px] lg:pb-10"
+          className="grid gap-6 pb-10 md:grid-cols-2 md:items-start lg:gap-12 lg:pb-20"
           initial="hidden"
           animate="show"
           transition={{ staggerChildren: 0.12 }}
         >
           <div>
-            <Motion.div variants={itemVariants} className="mb-6 flex flex-wrap gap-2 text-xs font-bold uppercase text-text-muted">
-              <span className="rounded-full border border-glass-border px-3 py-2">+ Product design</span>
-              <span className="rounded-full border border-glass-border px-3 py-2">+ Websites</span>
-              <span className="rounded-full border border-glass-border px-3 py-2">+ London / Remote</span>
+            <Motion.div variants={itemVariants} className="mb-5 flex flex-wrap gap-1.5 text-[10px] font-bold uppercase text-text-muted lg:mb-4">
+              <span className="rounded-full border border-glass-border px-1.5 py-1">+ Product design</span>
+              <span className="rounded-full border border-glass-border px-1.5 py-1">+ UI</span>
+              <span className="rounded-full border border-glass-border px-1.5 py-1">+ UX</span>
+              <span className="rounded-full border border-glass-border px-1.5 py-1">+ Apps</span>
+              <span className="rounded-full border border-glass-border px-1.5 py-1">+ Websites</span>
+              <span className="rounded-full border border-glass-border px-1.5 py-1">+ London / Remote</span>
             </Motion.div>
             <Motion.h1
               variants={itemVariants}
-              className="max-w-[1160px] text-[clamp(3rem,8.2vw,6.1rem)] font-black leading-[0.86] text-text lg:text-[clamp(5rem,9vw,11rem)]"
+              className="max-w-full text-[clamp(3rem,7.4vw,5.8rem)] font-black leading-[0.88] text-text lg:text-[clamp(4rem,5.6vw,6.6rem)]"
             >
-              Digital products and sharp websites for ambitious brands.
+              Designs powered by research and experience
             </Motion.h1>
           </div>
 
-          <Motion.div variants={itemVariants} className="max-w-sm justify-self-start md:justify-self-end">
-            <p className="mb-5 text-base leading-relaxed text-text-muted lg:text-lg">
-              I am Yemi, a product designer building clean interfaces, launch-ready websites, and portfolio pieces that move with purpose.
+          <Motion.div variants={itemVariants} className="max-w-lg justify-self-start md:mt-14 md:justify-self-end lg:mt-16">
+            <p className="mb-5 text-base leading-relaxed text-text-muted lg:text-base">
+              I'm a Senior UX/Product Designer with 10+ years of experience designing digital products that solve real user problems and deliver measurable business results. Having worked with top companies and innovative startups, I combine user research, product strategy, and intuitive UI design to transform complex challenges into seamless experiences. from discovery and prototyping to testing and delivery.
             </p>
             <a
-              href="#work"
+              href="mailto:yemi_aiyeola@hotmail.com"
               className="inline-flex items-center gap-3 rounded-full bg-primary px-6 py-4 text-sm font-black uppercase text-background transition-transform hover:-translate-y-1"
             >
-              View work
+              Lets chat
               <ArrowDownRight size={18} />
             </a>
           </Motion.div>
@@ -62,7 +65,7 @@ const Hero = ({ projects = [], isLoading }) => {
               <Link
                 key={`${project.id}-${index}`}
                 to={`/project/${project.id}`}
-                className="group relative h-[170px] w-[260px] shrink-0 overflow-hidden rounded-[20px] bg-background sm:h-[210px] sm:w-[340px]"
+                className="group relative h-[170px] w-[260px] shrink-0 overflow-hidden rounded-[20px] bg-background sm:h-[190px] sm:w-[310px] lg:h-[180px] lg:w-[300px]"
               >
                 {project.imageUrl && (
                   <img
@@ -78,7 +81,7 @@ const Hero = ({ projects = [], isLoading }) => {
                 </div>
               </Link>
             ))}
-            {isLoading && <div className="h-[170px] w-[260px] shrink-0 animate-pulse rounded-[20px] bg-background sm:h-[210px] sm:w-[340px]" />}
+            {isLoading && <div className="h-[170px] w-[260px] shrink-0 animate-pulse rounded-[20px] bg-background sm:h-[190px] sm:w-[310px] lg:h-[180px] lg:w-[300px]" />}
           </div>
         </Motion.div>
       </div>

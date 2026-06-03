@@ -58,10 +58,12 @@ const Navbar = ({ theme, toggleTheme }) => {
 
         <div className="hidden items-center gap-3 md:flex">
           <a
-            href="mailto:hello@yemi.design"
+            href="https://www.linkedin.com/in/yemi-aiyeola-598a9a225/"
+            target="_blank"
+            rel="noreferrer"
             className="inline-flex h-10 items-center gap-2 rounded-full bg-text px-5 text-sm font-bold text-background transition-transform hover:-translate-y-0.5"
           >
-            Start a project
+            LinkedIn
             <ArrowUpRight size={16} />
           </a>
         </div>
@@ -96,10 +98,12 @@ const Navbar = ({ theme, toggleTheme }) => {
               ))}
             </div>
             <a
-              href="mailto:hello@yemi.design"
+              href="https://www.linkedin.com/in/yemi-aiyeola-598a9a225/"
+              target="_blank"
+              rel="noreferrer"
               className="mt-2 inline-flex w-full items-center justify-center gap-2 rounded-full bg-text px-5 py-3 text-sm font-bold text-background"
             >
-              Start a project
+              LinkedIn
               <ArrowUpRight size={16} />
             </a>
           </Motion.div>
