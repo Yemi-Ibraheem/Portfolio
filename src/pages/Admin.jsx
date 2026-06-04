@@ -1,7 +1,7 @@
 import React, { useCallback, useEffect, useMemo, useState } from 'react';
 import { Plus, Edit2, Trash2, X, Upload, Save, LogOut, Key, GripVertical } from 'lucide-react';
 import { motion as Motion, AnimatePresence } from 'framer-motion';
-import { API_BASE, fallbackProjectList, normaliseProjects } from '../lib/projects';
+import { API_BASE, fallbackProjectList, inferMediaType, normaliseProjects } from '../lib/projects';
 
 const emptyProject = () => ({
   title: '',
@@ -12,6 +12,15 @@ const emptyProject = () => ({
   behanceLink: '',
   industry: '',
   tags: [],
+  media: [],
+});
+
+const createMediaItem = ({ url, caption = '', alt = '', type }) => ({
+  id: `media-${Date.now()}-${Math.random().toString(36).slice(2, 8)}`,
+  url,
+  caption,
+  alt,
+  type: type || inferMediaType(url),
 });
 
 const Admin = () => {
@@ -23,6 +32,8 @@ const Admin = () => {
   const [loading, setLoading] = useState(false);
   const [statusMessage, setStatusMessage] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
+  const [mediaUrlInput, setMediaUrlInput] = useState('');
+  const [mediaCaptionInput, setMediaCaptionInput] = useState('');
 
   const sortedProjects = useMemo(() => projects, [projects]);
 
@@ -112,6 +123,13 @@ const Admin = () => {
       ...currentProject,
       id: currentProject.id || (Math.max(0, ...projects.map((project) => Number(project.id) || 0)) + 1).toString(),
       tags: currentProject.tags.filter(Boolean),
+      media: (currentProject.media || [])
+        .filter((item) => item.url)
+        .map((item, index) => ({
+          ...item,
+          id: item.id || `media-${index}`,
+          type: item.type || inferMediaType(item.url),
+        })),
     };
 
     const updatedProjects = currentProject.id
@@ -141,32 +159,120 @@ const Admin = () => {
     }
   };
 
-  const handleFileUpload = async (event) => {
-    const file = event.target.files[0];
-    if (!file) return;
-
+  const uploadMediaFile = async (file) => {
     const formData = new FormData();
     formData.append('image', file);
 
+    const response = await fetch(`${API_BASE}/upload`, {
+      method: 'POST',
+      headers: { 'x-admin-password': password },
+      body: formData,
+    });
+
+    if (!response.ok) throw new Error('Upload failed');
+
+    const data = await response.json();
+    return data.imageUrl;
+  };
+
+  const handleHeroFileUpload = async (event) => {
+    const file = event.target.files[0];
+    if (!file) return;
+
     try {
       setLoading(true);
-      const response = await fetch(`${API_BASE}/upload`, {
-        method: 'POST',
-        headers: { 'x-admin-password': password },
-        body: formData,
-      });
-
-      if (!response.ok) throw new Error('Upload failed');
-
-      const data = await response.json();
-      setCurrentProject((project) => ({ ...project, imageUrl: data.imageUrl }));
-      showStatus('Image uploaded.');
+      const imageUrl = await uploadMediaFile(file);
+      setCurrentProject((project) => ({ ...project, imageUrl }));
+      showStatus('Hero image uploaded.');
     } catch (error) {
       console.error('Upload failed', error);
       showError('Upload failed. Confirm the CMS server is running and the password is correct.');
     } finally {
       setLoading(false);
+      event.target.value = '';
     }
+  };
+
+  const handleMediaFileUpload = async (event) => {
+    const files = Array.from(event.target.files || []);
+    if (!files.length) return;
+
+    try {
+      setLoading(true);
+      const uploadedItems = [];
+
+      for (const file of files) {
+        const url = await uploadMediaFile(file);
+        uploadedItems.push(
+          createMediaItem({
+            url,
+            caption: file.name.replace(/\.[^/.]+$/, ''),
+            alt: `${currentProject.title || 'Project'} media`,
+            type: file.type === 'image/gif' ? 'gif' : inferMediaType(url),
+          })
+        );
+      }
+
+      setCurrentProject((project) => ({
+        ...project,
+        media: [...(project.media || []), ...uploadedItems],
+      }));
+      showStatus(`${uploadedItems.length} media ${uploadedItems.length === 1 ? 'item' : 'items'} uploaded.`);
+    } catch (error) {
+      console.error('Media upload failed', error);
+      showError('Media upload failed. Confirm the CMS server is running and the password is correct.');
+    } finally {
+      setLoading(false);
+      event.target.value = '';
+    }
+  };
+
+  const handleAddMediaUrl = () => {
+    const url = mediaUrlInput.trim();
+    if (!url) return;
+
+    setCurrentProject((project) => ({
+      ...project,
+      media: [
+        ...(project.media || []),
+        createMediaItem({
+          url,
+          caption: mediaCaptionInput.trim(),
+          alt: mediaCaptionInput.trim() || `${project.title || 'Project'} media`,
+        }),
+      ],
+    }));
+    setMediaUrlInput('');
+    setMediaCaptionInput('');
+  };
+
+  const updateMediaItem = (id, updates) => {
+    setCurrentProject((project) => ({
+      ...project,
+      media: (project.media || []).map((item) => (item.id === id ? { ...item, ...updates } : item)),
+    }));
+  };
+
+  const removeMediaItem = (id) => {
+    setCurrentProject((project) => ({
+      ...project,
+      media: (project.media || []).filter((item) => item.id !== id),
+    }));
+  };
+
+  const moveMediaItem = (id, direction) => {
+    setCurrentProject((project) => {
+      const media = [...(project.media || [])];
+      const index = media.findIndex((item) => item.id === id);
+      const targetIndex = index + direction;
+
+      if (index < 0 || targetIndex < 0 || targetIndex >= media.length) {
+        return project;
+      }
+
+      [media[index], media[targetIndex]] = [media[targetIndex], media[index]];
+      return { ...project, media };
+    });
   };
 
   const moveProject = async (id, direction) => {
@@ -233,6 +339,8 @@ const Admin = () => {
             <button
               onClick={() => {
                 setCurrentProject(emptyProject());
+                setMediaUrlInput('');
+                setMediaCaptionInput('');
                 setIsEditing(true);
               }}
               className="inline-flex items-center gap-2 rounded-full bg-primary px-5 py-3 text-sm font-black uppercase text-background"
@@ -274,6 +382,11 @@ const Admin = () => {
                       {tag}
                     </span>
                   ))}
+                  {project.media.length > 0 && (
+                    <span className="rounded-full border border-glass-border px-3 py-1 text-[11px] font-bold uppercase text-text-muted">
+                      {project.media.length} media
+                    </span>
+                  )}
                 </div>
               </div>
               <div className="flex flex-wrap gap-2 md:justify-end">
@@ -286,6 +399,8 @@ const Admin = () => {
                 <button
                   onClick={() => {
                     setCurrentProject(project);
+                    setMediaUrlInput('');
+                    setMediaCaptionInput('');
                     setIsEditing(true);
                   }}
                   className="grid h-11 w-11 place-items-center rounded-full bg-text text-background"
@@ -330,7 +445,7 @@ const Admin = () => {
                       required
                     />
                   </label>
-                  <div className="grid gap-4 md:grid-cols-3">
+                  <div className="grid gap-4 md:grid-cols-[1.4fr_1fr_0.65fr]">
                     <label className="block text-sm font-bold text-text-muted">
                       Role
                       <input
@@ -395,7 +510,7 @@ const Admin = () => {
 
                 <div className="space-y-4">
                   <div>
-                    <p className="mb-2 text-sm font-bold text-text-muted">Portfolio image</p>
+                    <p className="mb-2 text-sm font-bold text-text-muted">Hero image</p>
                     <button
                       type="button"
                       onClick={() => document.getElementById('imageUpload')?.click()}
@@ -410,18 +525,154 @@ const Admin = () => {
                         </span>
                       )}
                     </button>
-                    <input id="imageUpload" type="file" hidden onChange={handleFileUpload} accept="image/*" />
+                    <input id="imageUpload" type="file" hidden onChange={handleHeroFileUpload} accept="image/*,.gif" />
                   </div>
                   <label className="block text-sm font-bold text-text-muted">
-                    Or paste image URL
+                    Or paste hero image URL
                     <input
-                      type="url"
+                      type="text"
                       value={currentProject.imageUrl}
                       onChange={(event) => setCurrentProject({ ...currentProject, imageUrl: event.target.value })}
                       className="mt-2 w-full rounded-2xl border border-glass-border bg-surface px-4 py-3 text-text outline-none focus:border-primary"
                       placeholder="https://..."
                     />
                   </label>
+                  <div className="rounded-[24px] border border-glass-border bg-surface p-4">
+                    <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+                      <div>
+                        <p className="text-sm font-black text-text">Gallery media</p>
+                        <p className="mt-1 text-xs font-bold text-text-muted">Images and GIFs appear on the product page gallery.</p>
+                      </div>
+                      <button
+                        type="button"
+                        onClick={() => document.getElementById('mediaUpload')?.click()}
+                        className="inline-flex items-center justify-center gap-2 rounded-full bg-primary px-4 py-3 text-xs font-black uppercase text-background"
+                      >
+                        <Upload size={16} />
+                        Upload
+                      </button>
+                      <input id="mediaUpload" type="file" hidden multiple onChange={handleMediaFileUpload} accept="image/*,.gif" />
+                    </div>
+
+                    <div className="mt-4 grid gap-3">
+                      <label className="block text-xs font-bold text-text-muted">
+                        Media URL
+                        <input
+                          type="text"
+                          value={mediaUrlInput}
+                          onChange={(event) => setMediaUrlInput(event.target.value)}
+                          className="mt-2 w-full rounded-2xl border border-glass-border bg-background px-4 py-3 text-text outline-none focus:border-primary"
+                          placeholder="https://.../image-or-animation.gif"
+                        />
+                      </label>
+                      <label className="block text-xs font-bold text-text-muted">
+                        Caption
+                        <input
+                          type="text"
+                          value={mediaCaptionInput}
+                          onChange={(event) => setMediaCaptionInput(event.target.value)}
+                          className="mt-2 w-full rounded-2xl border border-glass-border bg-background px-4 py-3 text-text outline-none focus:border-primary"
+                          placeholder="Onboarding flow"
+                        />
+                      </label>
+                      <button
+                        type="button"
+                        onClick={handleAddMediaUrl}
+                        className="inline-flex items-center justify-center gap-2 rounded-full border border-glass-border px-4 py-3 text-xs font-black uppercase text-text"
+                      >
+                        <Plus size={16} />
+                        Add URL
+                      </button>
+                    </div>
+
+                    <div className="mt-5 space-y-3">
+                      {(currentProject.media || []).length === 0 ? (
+                        <div className="rounded-2xl border border-dashed border-glass-border px-4 py-6 text-center text-sm font-bold text-text-muted">
+                          No gallery media yet.
+                        </div>
+                      ) : (
+                        (currentProject.media || []).map((item, index) => (
+                          <div key={item.id} className="grid gap-3 rounded-2xl border border-glass-border bg-background p-3">
+                            <div className="grid gap-3 sm:grid-cols-[96px_1fr]">
+                              <div className="relative aspect-[4/3] overflow-hidden rounded-xl bg-surface">
+                                {item.url ? (
+                                  <img
+                                    src={item.url}
+                                    alt={item.alt || item.caption || 'Gallery media'}
+                                    className="h-full w-full object-cover"
+                                    onError={(event) => {
+                                      event.currentTarget.style.display = 'none';
+                                    }}
+                                  />
+                                ) : null}
+                                {item.type === 'gif' && (
+                                  <span className="absolute bottom-2 left-2 rounded-full bg-text px-2 py-1 text-[10px] font-black uppercase text-background">
+                                    GIF
+                                  </span>
+                                )}
+                              </div>
+                              <div className="grid gap-2">
+                                <input
+                                  type="text"
+                                  value={item.url}
+                                  onChange={(event) => updateMediaItem(item.id, { url: event.target.value, type: inferMediaType(event.target.value) })}
+                                  className="w-full rounded-xl border border-glass-border bg-surface px-3 py-2 text-sm text-text outline-none focus:border-primary"
+                                  aria-label="Media URL"
+                                />
+                                <input
+                                  type="text"
+                                  value={item.caption}
+                                  onChange={(event) => updateMediaItem(item.id, { caption: event.target.value })}
+                                  className="w-full rounded-xl border border-glass-border bg-surface px-3 py-2 text-sm text-text outline-none focus:border-primary"
+                                  placeholder="Caption"
+                                  aria-label="Media caption"
+                                />
+                                <input
+                                  type="text"
+                                  value={item.alt}
+                                  onChange={(event) => updateMediaItem(item.id, { alt: event.target.value })}
+                                  className="w-full rounded-xl border border-glass-border bg-surface px-3 py-2 text-sm text-text outline-none focus:border-primary"
+                                  placeholder="Alt text"
+                                  aria-label="Media alt text"
+                                />
+                              </div>
+                            </div>
+                            <div className="flex flex-wrap items-center justify-between gap-2">
+                              <span className="text-xs font-black uppercase text-text-muted">Item {index + 1}</span>
+                              <div className="flex gap-2">
+                                <button
+                                  type="button"
+                                  onClick={() => moveMediaItem(item.id, -1)}
+                                  disabled={index === 0}
+                                  className="grid h-9 w-9 place-items-center rounded-full border border-glass-border text-text"
+                                  aria-label="Move media up"
+                                >
+                                  <GripVertical size={16} />
+                                </button>
+                                <button
+                                  type="button"
+                                  onClick={() => moveMediaItem(item.id, 1)}
+                                  disabled={index === (currentProject.media || []).length - 1}
+                                  className="grid h-9 w-9 place-items-center rounded-full border border-glass-border text-text"
+                                  aria-label="Move media down"
+                                >
+                                  <GripVertical size={16} />
+                                </button>
+                                <button
+                                  type="button"
+                                  onClick={() => removeMediaItem(item.id)}
+                                  className="grid h-9 w-9 place-items-center rounded-full bg-red-500 text-white"
+                                  aria-label="Remove media"
+                                >
+                                  <Trash2 size={16} />
+                                </button>
+                              </div>
+                            </div>
+                          </div>
+                        ))
+                      )}
+                    </div>
+                  </div>
                   <button
                     type="submit"
                     disabled={loading}

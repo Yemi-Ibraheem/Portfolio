@@ -2,17 +2,52 @@ import fallbackProjects from '../data/projects.json';
 
 export const API_BASE = import.meta.env.VITE_API_BASE || 'http://localhost:5000/api';
 
-const normaliseProject = (project) => ({
-  id: String(project.id ?? ''),
-  title: project.title ?? '',
-  role: project.role ?? '',
-  year: project.year ?? '',
-  description: project.description ?? '',
-  imageUrl: project.imageUrl ?? '',
-  behanceLink: project.behanceLink ?? '',
-  industry: project.industry ?? project.role ?? '',
-  tags: Array.isArray(project.tags) ? project.tags : [],
-});
+export const inferMediaType = (url = '') => {
+  const cleanUrl = url.split('?')[0].toLowerCase();
+
+  if (cleanUrl.startsWith('data:image/gif')) return 'gif';
+  if (cleanUrl.endsWith('.gif')) return 'gif';
+  return 'image';
+};
+
+const normaliseMediaItem = (item, index) => {
+  if (typeof item === 'string') {
+    return {
+      id: `media-${index}`,
+      url: item,
+      caption: '',
+      alt: '',
+      type: inferMediaType(item),
+    };
+  }
+
+  const url = item?.url ?? item?.src ?? '';
+
+  return {
+    id: String(item?.id ?? `media-${index}`),
+    url,
+    caption: item?.caption ?? item?.label ?? '',
+    alt: item?.alt ?? item?.caption ?? '',
+    type: item?.type ?? inferMediaType(url),
+  };
+};
+
+const normaliseProject = (project) => {
+  const media = Array.isArray(project.media) ? project.media : project.gallery;
+
+  return {
+    id: String(project.id ?? ''),
+    title: project.title ?? '',
+    role: project.role ?? '',
+    year: project.year ?? '',
+    description: project.description ?? '',
+    imageUrl: project.imageUrl ?? '',
+    behanceLink: project.behanceLink ?? '',
+    industry: project.industry ?? project.role ?? '',
+    tags: Array.isArray(project.tags) ? project.tags : [],
+    media: Array.isArray(media) ? media.map(normaliseMediaItem).filter((item) => item.url) : [],
+  };
+};
 
 export const normaliseProjects = (projects) =>
   Array.isArray(projects) ? projects.map(normaliseProject) : [];
