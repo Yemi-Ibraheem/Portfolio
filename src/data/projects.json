@@ -185,19 +185,56 @@
   {
     "id": "3",
     "title": "Ai Built Global Recipe Platform",
-    "role": "Founding designer",
+    "role": "Founding Designer",
     "year": "2025",
     "teamSize": "2",
-    "description": "Designed an intuitive dashboard for healthcare professionals to monitor patient data and manage appointments efficiently.",
-    "detailIntro": "",
-    "imageUrl": "https://images.unsplash.com/photo-1504868584819-f8e8b4b6d7e3?q=80&w=1600&auto=format&fit=crop",
+    "description": "Giving chefs worldwide a platform to monetize their recipes. I designed the complete flow and used Ai (Claude, Codex, Gemini) to create a fully functional SAAS with a managed backend (Convex) and onboarding customers real time",
+    "detailIntro": "Locally designed and Ai developed SAAS platform",
+    "imageUrl": "http://localhost:5000/uploads/1781031153831-245381314-CultifThumbnail.png",
     "behanceLink": "https://www.cultif.com",
-    "industry": "Food",
+    "industry": "Ai",
     "tags": [
       "SaaS",
-      "Ai"
+      "Ai",
+      "Food",
+      "Claude"
     ],
-    "media": [],
-    "detailSections": []
+    "media": [
+      {
+        "id": "media-1781033260103-kaj9rq",
+        "url": "http://localhost:5000/uploads/1781033260071-301108459-Explainer.png",
+        "caption": "",
+        "alt": "Ai Built Global Recipe Platform media",
+        "type": "image"
+      },
+      {
+        "id": "media-1781033252854-ubobxa",
+        "url": "http://localhost:5000/uploads/1781033252822-49440581-Explainer 2.png",
+        "caption": "",
+        "alt": "Ai Built Global Recipe Platform media",
+        "type": "image"
+      }
+    ],
+    "detailSections": [
+      {
+        "title": "Context",
+        "copy": [
+          "With the rise of user-generated content, but also the  difficulty in being able to find recipes from different cultures, there was clearly a gap. Actually going out and talking to chefs, especially from other countries, seeing their pain points in being able to access global markets and monetize their recipes despite their large following was how the idea was born. Especially with the success of Patreon and other user-based-content platforms."
+        ]
+      },
+      {
+        "title": "Approach",
+        "copy": [
+          "I began with intensive research into competitors and existing products, documenting key insights and creating a comparative table to identify where each product excelled, where gaps existed, and where my concept could stand out. From there, I developed mockups around a clear USP, tested and refined the user flow, and gradually moved toward a finalised design.",
+          "The next stage was moving into an AI-powered IDE, starting with Cursor, to begin developing the product while using the completed designs as a reference point. This became a valuable learning project, giving me hands-on experience across frontend, backend, and the wider development cycle, ultimately helping us reach the intended goal."
+        ]
+      },
+      {
+        "title": "Outcome",
+        "copy": [
+          "A SAAS that users can upload their recipes and share their profiles to their page where their followers can pay for their recipes and Stripe will pay them individually as well as pay the platform percentage."
+        ]
+      }
+    ]
   }
 ]
