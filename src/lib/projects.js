@@ -2,6 +2,20 @@ import fallbackProjects from '../data/projects.json';
 
 export const API_BASE = import.meta.env.VITE_API_BASE || 'http://localhost:5000/api';
 
+const getApiOrigin = () => {
+  try {
+    return new URL(API_BASE, typeof window === 'undefined' ? 'http://localhost' : window.location.origin).origin;
+  } catch {
+    return '';
+  }
+};
+
+export const resolveMediaUrl = (url = '') => {
+  if (!url) return '';
+  if (url.startsWith('/uploads/')) return `${getApiOrigin()}${url}`;
+  return url;
+};
+
 export const inferMediaType = (url = '') => {
   const cleanUrl = url.split('?')[0].toLowerCase();
 
@@ -14,14 +28,14 @@ const normaliseMediaItem = (item, index) => {
   if (typeof item === 'string') {
     return {
       id: `media-${index}`,
-      url: item,
+      url: resolveMediaUrl(item),
       caption: '',
       alt: '',
       type: inferMediaType(item),
     };
   }
 
-  const url = item?.url ?? item?.src ?? '';
+  const url = resolveMediaUrl(item?.url ?? item?.src ?? '');
 
   return {
     id: String(item?.id ?? `media-${index}`),
@@ -59,7 +73,7 @@ const normaliseProject = (project) => {
     teamSize: project.teamSize ?? '',
     description: project.description ?? '',
     detailIntro: project.detailIntro ?? '',
-    imageUrl: project.imageUrl ?? '',
+    imageUrl: resolveMediaUrl(project.imageUrl ?? ''),
     behanceLink: project.behanceLink ?? '',
     industry: project.industry ?? project.role ?? '',
     tags: Array.isArray(project.tags) ? project.tags : [],

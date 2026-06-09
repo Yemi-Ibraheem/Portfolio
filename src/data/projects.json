@@ -7,7 +7,7 @@
     "teamSize": "2",
     "description": "A comprehensive redesign of an in-depth web based research platform tailored to medical researchers. It was just as complex as it sounds!",
     "detailIntro": "Redesigning the Health Data Gateway from scratch.",
-    "imageUrl": "https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=1600&auto=format&fit=crop",
+    "imageUrl": "/uploads/1781024476313-149742925-Celestial Laptop Mockup.png",
     "behanceLink": "https://healthdatagateway.org/en",
     "industry": "Health",
     "tags": [
@@ -55,6 +55,68 @@
         "title": "Outcome",
         "copy": [
           "The redesign delivered a more intuitive and user-centred experience for discovering and exploring health data resources. By simplifying complex user journeys and improving information architecture, users were able to navigate the platform more efficiently and access relevant datasets with greater confidence. The work established a scalable foundation for future product development while helping Health Data Research UK further its mission of enabling data-driven health research across the UK."
+        ]
+      }
+    ]
+  },
+  {
+    "id": "4",
+    "title": "World of Warcraft App",
+    "role": "UX Designer",
+    "year": "2020",
+    "teamSize": "Solo",
+    "description": "A mobile companion for World of Warcraft, designed from concept to production used by millions of users... later retired due to botting issues",
+    "detailIntro": "Designing from scratch a high-quality mobile companion app for the World of Warcraft universe",
+    "imageUrl": "/uploads/1781026301585-402056634-Hero.png",
+    "behanceLink": "https://worldofwarcraft.blizzard.com/en-us/news/24061010/the-wow-companion-app-retiring",
+    "industry": "Gaming",
+    "tags": [
+      "App",
+      "APIs",
+      "Gaming"
+    ],
+    "media": [
+      {
+        "id": "media-1781014272103-7ebfii",
+        "url": "/uploads/1781014272079-488885990-Explainer 3.png",
+        "caption": "",
+        "alt": "World of Warcraft App media",
+        "type": "image"
+      },
+      {
+        "id": "media-1781014277571-z1c1wg",
+        "url": "/uploads/1781014277564-383205219-Explainer 2.png",
+        "caption": "",
+        "alt": "World of Warcraft App media",
+        "type": "image"
+      },
+      {
+        "id": "media-1781014283018-ck94ab",
+        "url": "/uploads/1781014283002-964361777-Explainer.png",
+        "caption": "",
+        "alt": "World of Warcraft App media",
+        "type": "image"
+      }
+    ],
+    "detailSections": [
+      {
+        "title": "Context",
+        "copy": [
+          "World of Warcraft has a deep and highly detailed player experience, with layers of characters, progression systems, guilds, quests, items, achievements, and community interaction. The challenge was to design a companion app that could simplify this complexity without stripping away the atmosphere and depth that players expect from the franchise. The product needed to feel useful, immersive, and credible to a gaming audience while also being clear enough to present as a commercially valuable mobile product.",
+          "The app was created within an investor-led environment, meaning the design had to do more than look good. It needed to demonstrate product potential, show how the experience could fit into the wider World of Warcraft ecosystem, and communicate a compelling vision that could be understood by both business stakeholders and gaming users."
+        ]
+      },
+      {
+        "title": "Approach",
+        "copy": [
+          "My approach focused on combining strong mobile UX principles with high-quality visual design suited to a fantasy gaming product. I explored how core companion app features could be organised into simple, accessible journeys, allowing users to quickly access character information, progression updates, social features, and in-game related content without feeling overwhelmed.",
+          "I created interface designs that balanced usability with atmosphere, using clear layouts, strong visual hierarchy, game-inspired styling, and intuitive interaction patterns. The goal was to make the app feel premium and familiar to players while still functioning like a modern mobile product. I also considered how the design could support investor conversations by making the product vision easy to understand, visually impressive, and commercially compelling."
+        ]
+      },
+      {
+        "title": "Outcome",
+        "copy": [
+          "The final designs helped position the companion app as a polished, high-value mobile product concept capable of extending the World of Warcraft experience beyond the main game. The UI work gave the product a strong visual identity, clear user journeys, and a professional level of presentation that supported stakeholder and investor confidence. The project demonstrated my ability to translate a complex entertainment IP into a refined mobile experience, balancing fan expectations, product usability, and commercial storytelling."
         ]
       }
     ]
@@ -117,68 +179,6 @@
         "title": "Outcome",
         "copy": [
           "The work helped Vodafone explore a more engaging direction for their app experiences, moving beyond purely functional journeys toward a more interactive, retention-focused product experience. By introducing gamification principles and social media-inspired interaction patterns, the designs created opportunities to increase repeat engagement, strengthen customer loyalty, and make the app feel more useful in users’ daily lives. The project also helped align global stakeholders around a clearer product vision, supporting a scalable design direction that could be adapted across Vodafone markets."
-        ]
-      }
-    ]
-  },
-  {
-    "id": "4",
-    "title": "World of Warcraft App",
-    "role": "UX Designer",
-    "year": "2020",
-    "teamSize": "Solo",
-    "description": "A mobile companion for World of Warcraft, designed from concept to production used by millions of users... later retired due to botting issues",
-    "detailIntro": "Designing from scratch a high-quality mobile companion app for the World of Warcraft universe",
-    "imageUrl": "/uploads/1781008129977-607168595-Desktops.png",
-    "behanceLink": "https://worldofwarcraft.blizzard.com/en-us/news/24061010/the-wow-companion-app-retiring",
-    "industry": "Gaming",
-    "tags": [
-      "App",
-      "APIs",
-      "Gaming"
-    ],
-    "media": [
-      {
-        "id": "media-1781014272103-7ebfii",
-        "url": "/uploads/1781014272079-488885990-Explainer 3.png",
-        "caption": "",
-        "alt": "World of Warcraft App media",
-        "type": "image"
-      },
-      {
-        "id": "media-1781014277571-z1c1wg",
-        "url": "/uploads/1781014277564-383205219-Explainer 2.png",
-        "caption": "",
-        "alt": "World of Warcraft App media",
-        "type": "image"
-      },
-      {
-        "id": "media-1781014283018-ck94ab",
-        "url": "/uploads/1781014283002-964361777-Explainer.png",
-        "caption": "",
-        "alt": "World of Warcraft App media",
-        "type": "image"
-      }
-    ],
-    "detailSections": [
-      {
-        "title": "Context",
-        "copy": [
-          "World of Warcraft has a deep and highly detailed player experience, with layers of characters, progression systems, guilds, quests, items, achievements, and community interaction. The challenge was to design a companion app that could simplify this complexity without stripping away the atmosphere and depth that players expect from the franchise. The product needed to feel useful, immersive, and credible to a gaming audience while also being clear enough to present as a commercially valuable mobile product.",
-          "The app was created within an investor-led environment, meaning the design had to do more than look good. It needed to demonstrate product potential, show how the experience could fit into the wider World of Warcraft ecosystem, and communicate a compelling vision that could be understood by both business stakeholders and gaming users."
-        ]
-      },
-      {
-        "title": "Approach",
-        "copy": [
-          "My approach focused on combining strong mobile UX principles with high-quality visual design suited to a fantasy gaming product. I explored how core companion app features could be organised into simple, accessible journeys, allowing users to quickly access character information, progression updates, social features, and in-game related content without feeling overwhelmed.",
-          "I created interface designs that balanced usability with atmosphere, using clear layouts, strong visual hierarchy, game-inspired styling, and intuitive interaction patterns. The goal was to make the app feel premium and familiar to players while still functioning like a modern mobile product. I also considered how the design could support investor conversations by making the product vision easy to understand, visually impressive, and commercially compelling."
-        ]
-      },
-      {
-        "title": "Outcome",
-        "copy": [
-          "The final designs helped position the companion app as a polished, high-value mobile product concept capable of extending the World of Warcraft experience beyond the main game. The UI work gave the product a strong visual identity, clear user journeys, and a professional level of presentation that supported stakeholder and investor confidence. The project demonstrated my ability to translate a complex entertainment IP into a refined mobile experience, balancing fan expectations, product usability, and commercial storytelling."
         ]
       }
     ]

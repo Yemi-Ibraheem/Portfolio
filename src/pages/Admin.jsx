@@ -1,7 +1,7 @@
 import React, { useCallback, useEffect, useMemo, useState } from 'react';
 import { Plus, Edit2, Trash2, X, Upload, Save, LogOut, Key, GripVertical } from 'lucide-react';
 import { motion as Motion, AnimatePresence } from 'framer-motion';
-import { API_BASE, fallbackProjectList, inferMediaType, normaliseProjects } from '../lib/projects';
+import { API_BASE, fallbackProjectList, inferMediaType, normaliseProjects, resolveMediaUrl } from '../lib/projects';
 
 const emptyProject = () => ({
   title: '',
@@ -35,11 +35,26 @@ const normaliseEditableSections = (sections = []) =>
 
 const createMediaItem = ({ url, caption = '', alt = '', type }) => ({
   id: `media-${Date.now()}-${Math.random().toString(36).slice(2, 8)}`,
-  url,
+  url: resolveMediaUrl(url),
   caption,
   alt,
   type: type || inferMediaType(url),
 });
+
+const validateImageUrl = (url) =>
+  new Promise((resolve, reject) => {
+    const imageUrl = resolveMediaUrl(url.trim());
+
+    if (!imageUrl) {
+      resolve('');
+      return;
+    }
+
+    const image = new Image();
+    image.onload = () => resolve(imageUrl);
+    image.onerror = () => reject(new Error('Image could not be loaded'));
+    image.src = imageUrl;
+  });
 
 const Admin = () => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -161,12 +176,19 @@ const Admin = () => {
       : [...projects, normalisedCurrent];
 
     try {
+      normalisedCurrent.imageUrl = await validateImageUrl(normalisedCurrent.imageUrl);
+      normalisedCurrent.media = await Promise.all(
+        normalisedCurrent.media.map(async (item) => ({
+          ...item,
+          url: await validateImageUrl(item.url),
+        }))
+      );
       await persistProjects(updatedProjects, 'Project saved.');
       setIsEditing(false);
       setCurrentProject(emptyProject());
     } catch (error) {
       console.error('Save failed', error);
-      showError('Save failed. Confirm the CMS server is running and the password is correct.');
+      showError('Save failed. Check that every hero and gallery image URL opens correctly.');
     } finally {
       setLoading(false);
     }
@@ -205,17 +227,32 @@ const Admin = () => {
 
     try {
       setLoading(true);
-      const imageUrl = await uploadMediaFile(file);
+      const imageUrl = await validateImageUrl(await uploadMediaFile(file));
       setCurrentProject((project) => ({ ...project, imageUrl }));
       showStatus('Hero image uploaded.');
     } catch (error) {
       console.error('Upload failed', error);
-      showError('Upload failed. Confirm the CMS server is running and the password is correct.');
+      showError('Upload rejected. Choose an image file that can be opened in the browser.');
     } finally {
       setLoading(false);
       event.target.value = '';
     }
   };
+
+  const handleHeroUrlBlur = async () => {
+    const url = currentProject.imageUrl.trim();
+    if (!url) return;
+
+    try {
+      const imageUrl = await validateImageUrl(url);
+      setCurrentProject((project) => ({ ...project, imageUrl }));
+    } catch (error) {
+      console.error('Hero image URL rejected', error);
+      setCurrentProject((project) => ({ ...project, imageUrl: '' }));
+      showError('That hero image URL could not be opened. Try a different image type or URL.');
+    }
+  };
+
 
   const handleMediaFileUpload = async (event) => {
     const files = Array.from(event.target.files || []);
@@ -226,7 +263,7 @@ const Admin = () => {
       const uploadedItems = [];
 
       for (const file of files) {
-        const url = await uploadMediaFile(file);
+        const url = await validateImageUrl(await uploadMediaFile(file));
         uploadedItems.push(
           createMediaItem({
             url,
@@ -244,30 +281,37 @@ const Admin = () => {
       showStatus(`${uploadedItems.length} media ${uploadedItems.length === 1 ? 'item' : 'items'} uploaded.`);
     } catch (error) {
       console.error('Media upload failed', error);
-      showError('Media upload failed. Confirm the CMS server is running and the password is correct.');
+      showError('Media upload rejected. Choose image files that can be opened in the browser.');
     } finally {
       setLoading(false);
       event.target.value = '';
     }
   };
 
-  const handleAddMediaUrl = () => {
+  const handleAddMediaUrl = async () => {
     const url = mediaUrlInput.trim();
     if (!url) return;
 
-    setCurrentProject((project) => ({
-      ...project,
-      media: [
-        ...(project.media || []),
-        createMediaItem({
-          url,
-          caption: mediaCaptionInput.trim(),
-          alt: mediaCaptionInput.trim() || `${project.title || 'Project'} media`,
-        }),
-      ],
-    }));
-    setMediaUrlInput('');
-    setMediaCaptionInput('');
+    try {
+      const imageUrl = await validateImageUrl(url);
+      setCurrentProject((project) => ({
+        ...project,
+        media: [
+          ...(project.media || []),
+          createMediaItem({
+            url: imageUrl,
+            caption: mediaCaptionInput.trim(),
+            alt: mediaCaptionInput.trim() || `${project.title || 'Project'} media`,
+          }),
+        ],
+      }));
+      setMediaUrlInput('');
+      setMediaCaptionInput('');
+      showStatus('Gallery image URL added.');
+    } catch (error) {
+      console.error('Media URL rejected', error);
+      showError('That gallery image URL could not be opened. Try a different image type or URL.');
+    }
   };
 
   const updateMediaItem = (id, updates) => {
@@ -607,6 +651,7 @@ const Admin = () => {
                       type="text"
                       value={currentProject.imageUrl}
                       onChange={(event) => setCurrentProject({ ...currentProject, imageUrl: event.target.value })}
+                      onBlur={handleHeroUrlBlur}
                       className="mt-2 w-full rounded-2xl border border-glass-border bg-surface px-4 py-3 text-text outline-none focus:border-primary"
                       placeholder="https://..."
                     />
