@@ -2,18 +2,28 @@ import fallbackProjects from '../data/projects.json';
 
 export const API_BASE = import.meta.env.VITE_API_BASE || 'http://localhost:5000/api';
 
-const getApiOrigin = () => {
-  try {
-    return new URL(API_BASE, typeof window === 'undefined' ? 'http://localhost' : window.location.origin).origin;
-  } catch {
-    return '';
-  }
-};
-
 export const resolveMediaUrl = (url = '') => {
   if (!url) return '';
-  if (url.startsWith('/uploads/')) return `${getApiOrigin()}${url}`;
+  if (url.startsWith('/uploads/')) return url;
   return url;
+};
+
+export const normaliseStoredMediaUrl = (url = '') => {
+  const trimmedUrl = url.trim();
+
+  if (!trimmedUrl) return '';
+  if (trimmedUrl.startsWith('/uploads/')) return trimmedUrl;
+
+  try {
+    const parsedUrl = new URL(trimmedUrl, typeof window === 'undefined' ? 'http://localhost' : window.location.origin);
+    if (parsedUrl.pathname.startsWith('/uploads/')) {
+      return `${parsedUrl.pathname}${parsedUrl.search}${parsedUrl.hash}`;
+    }
+  } catch {
+    return trimmedUrl;
+  }
+
+  return trimmedUrl;
 };
 
 export const inferMediaType = (url = '') => {

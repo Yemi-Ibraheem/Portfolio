@@ -7,7 +7,7 @@
     "teamSize": "Solo",
     "description": "A mobile companion for World of Warcraft, designed from concept to production used by millions of users... later retired due to botting issues",
     "detailIntro": "Designing from scratch a high-quality mobile companion app for the World of Warcraft universe",
-    "imageUrl": "http://localhost:5000/uploads/1781026301585-402056634-Hero.png",
+    "imageUrl": "/uploads/1781026301585-402056634-Hero.png",
     "behanceLink": "https://worldofwarcraft.blizzard.com/en-us/news/24061010/the-wow-companion-app-retiring",
     "industry": "Gaming",
     "tags": [
@@ -18,21 +18,21 @@
     "media": [
       {
         "id": "media-1781014272103-7ebfii",
-        "url": "http://localhost:5000/uploads/1781014272079-488885990-Explainer 3.png",
+        "url": "/uploads/1781014272079-488885990-Explainer 3.png",
         "caption": "",
         "alt": "World of Warcraft App media",
         "type": "image"
       },
       {
         "id": "media-1781014277571-z1c1wg",
-        "url": "http://localhost:5000/uploads/1781014277564-383205219-Explainer 2.png",
+        "url": "/uploads/1781014277564-383205219-Explainer 2.png",
         "caption": "",
         "alt": "World of Warcraft App media",
         "type": "image"
       },
       {
         "id": "media-1781014283018-ck94ab",
-        "url": "http://localhost:5000/uploads/1781014283002-964361777-Explainer.png",
+        "url": "/uploads/1781014283002-964361777-Explainer.png",
         "caption": "",
         "alt": "World of Warcraft App media",
         "type": "image"
@@ -69,7 +69,7 @@
     "teamSize": "40",
     "description": "Worked with a large global team of designers, expanding the product offering including gamification, using the same components in a more innovative way to attract and keep customers. ",
     "detailIntro": "Vodafone wanted to add gamification and inspiration from social media apps to retain users ",
-    "imageUrl": "http://localhost:5000/uploads/1781028866491-138253364-Vodafone Cover.png",
+    "imageUrl": "/uploads/1781028866491-138253364-Vodafone Cover.png",
     "behanceLink": "https://www.vodafone.co.uk/my-vodafone-account/my-vodafone-app",
     "industry": "Retail",
     "tags": [
@@ -80,21 +80,21 @@
     "media": [
       {
         "id": "media-1781030326233-atu2hz",
-        "url": "http://localhost:5000/uploads/1781030326214-319542417-Promo.jpg",
+        "url": "/uploads/1781030326214-319542417-Promo.jpg",
         "caption": "Gamification",
         "alt": "Vodafone new features media",
         "type": "image"
       },
       {
         "id": "media-1781030345541-detlgw",
-        "url": "http://localhost:5000/uploads/1781030345508-786280481-Different countries.jpeg",
+        "url": "/uploads/1781030345508-786280481-Different countries.jpeg",
         "caption": "Multiple regions",
         "alt": "Vodafone new features media",
         "type": "image"
       },
       {
         "id": "media-1781007712317-876z0o",
-        "url": "http://localhost:5000/uploads/1781007712254-408975728-Vodafone full page ss.png",
+        "url": "/uploads/1781007712254-408975728-Vodafone full page ss.png",
         "caption": "Vodafone full page ss",
         "alt": "Major Telecoms brand product updates media",
         "type": "image"
@@ -130,7 +130,7 @@
     "teamSize": "2",
     "description": "A comprehensive redesign of an in-depth web based research platform tailored to medical researchers. It was just as complex as it sounds!",
     "detailIntro": "Redesigning the Health Data Gateway from scratch.",
-    "imageUrl": "http://localhost:5000/uploads/1781024476313-149742925-Celestial Laptop Mockup.png",
+    "imageUrl": "/uploads/1781024476313-149742925-Celestial Laptop Mockup.png",
     "behanceLink": "https://healthdatagateway.org/en",
     "industry": "Health",
     "tags": [
@@ -141,21 +141,21 @@
     "media": [
       {
         "id": "media-1781005431873-nr3kba",
-        "url": "http://localhost:5000/uploads/1781005431841-765354048-Screenshot 2026-06-09 122621.png",
+        "url": "/uploads/1781005431841-765354048-Screenshot 2026-06-09 122621.png",
         "caption": "Homepage",
         "alt": "Homepage",
         "type": "image"
       },
       {
         "id": "media-1781005446755-dov197",
-        "url": "http://localhost:5000/uploads/1781005446747-115999573-Screenshot 2026-06-09 123531.png",
+        "url": "/uploads/1781005446747-115999573-Screenshot 2026-06-09 123531.png",
         "caption": "Dataset listings",
         "alt": "Product listings",
         "type": "image"
       },
       {
         "id": "media-1781005449597-z4nkuv",
-        "url": "http://localhost:5000/uploads/1781005449587-943226598-Screenshot 2026-06-09 123543.png",
+        "url": "/uploads/1781005449587-943226598-Screenshot 2026-06-09 123543.png",
         "caption": "Dataset page",
         "alt": "Product page",
         "type": "image"
@@ -190,7 +190,7 @@
     "teamSize": "2",
     "description": "Giving chefs worldwide a platform to monetize their recipes. I designed the complete flow and used Ai (Claude, Codex, Gemini) to create a fully functional SAAS with a managed backend (Convex) and onboarding customers real time",
     "detailIntro": "Locally designed and Ai developed SAAS platform",
-    "imageUrl": "http://localhost:5000/uploads/1781031153831-245381314-CultifThumbnail.png",
+    "imageUrl": "/uploads/1781031153831-245381314-CultifThumbnail.png",
     "behanceLink": "https://www.cultif.com",
     "industry": "Ai",
     "tags": [
@@ -202,14 +202,14 @@
     "media": [
       {
         "id": "media-1781033260103-kaj9rq",
-        "url": "http://localhost:5000/uploads/1781033260071-301108459-Explainer.png",
+        "url": "/uploads/1781033260071-301108459-Explainer.png",
         "caption": "",
         "alt": "Ai Built Global Recipe Platform media",
         "type": "image"
       },
       {
         "id": "media-1781033252854-ubobxa",
-        "url": "http://localhost:5000/uploads/1781033252822-49440581-Explainer 2.png",
+        "url": "/uploads/1781033252822-49440581-Explainer 2.png",
         "caption": "",
         "alt": "Ai Built Global Recipe Platform media",
         "type": "image"

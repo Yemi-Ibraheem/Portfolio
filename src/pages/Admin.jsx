@@ -1,7 +1,7 @@
 import React, { useCallback, useEffect, useMemo, useState } from 'react';
 import { Plus, Edit2, Trash2, X, Upload, Save, LogOut, Key, GripVertical } from 'lucide-react';
 import { motion as Motion, AnimatePresence } from 'framer-motion';
-import { API_BASE, fallbackProjectList, inferMediaType, normaliseProjects, resolveMediaUrl } from '../lib/projects';
+import { API_BASE, fallbackProjectList, inferMediaType, normaliseProjects, normaliseStoredMediaUrl, resolveMediaUrl } from '../lib/projects';
 
 const emptyProject = () => ({
   title: '',
@@ -35,7 +35,7 @@ const normaliseEditableSections = (sections = []) =>
 
 const createMediaItem = ({ url, caption = '', alt = '', type }) => ({
   id: `media-${Date.now()}-${Math.random().toString(36).slice(2, 8)}`,
-  url: resolveMediaUrl(url),
+  url: normaliseStoredMediaUrl(url),
   caption,
   alt,
   type: type || inferMediaType(url),
@@ -44,6 +44,7 @@ const createMediaItem = ({ url, caption = '', alt = '', type }) => ({
 const validateImageUrl = (url) =>
   new Promise((resolve, reject) => {
     const imageUrl = resolveMediaUrl(url.trim());
+    const storedImageUrl = normaliseStoredMediaUrl(imageUrl);
 
     if (!imageUrl) {
       resolve('');
@@ -51,7 +52,7 @@ const validateImageUrl = (url) =>
     }
 
     const image = new Image();
-    image.onload = () => resolve(imageUrl);
+    image.onload = () => resolve(storedImageUrl);
     image.onerror = () => reject(new Error('Image could not be loaded'));
     image.src = imageUrl;
   });
