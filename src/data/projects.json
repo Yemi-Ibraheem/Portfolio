@@ -1,65 +1,5 @@
 [
   {
-    "id": "1",
-    "title": "NHS project built on salesforce",
-    "role": "Lead Product Designer",
-    "year": "2024",
-    "teamSize": "2",
-    "description": "A comprehensive redesign of an in-depth web based research platform tailored to medical researchers. It was just as complex as it sounds!",
-    "detailIntro": "Redesigning the Health Data Gateway from scratch.",
-    "imageUrl": "/uploads/1781024476313-149742925-Celestial Laptop Mockup.png",
-    "behanceLink": "https://healthdatagateway.org/en",
-    "industry": "Health",
-    "tags": [
-      "SAAS",
-      "B2B",
-      "Figma"
-    ],
-    "media": [
-      {
-        "id": "media-1781005431873-nr3kba",
-        "url": "/uploads/1781005431841-765354048-Screenshot 2026-06-09 122621.png",
-        "caption": "Homepage",
-        "alt": "Homepage",
-        "type": "image"
-      },
-      {
-        "id": "media-1781005446755-dov197",
-        "url": "/uploads/1781005446747-115999573-Screenshot 2026-06-09 123531.png",
-        "caption": "Dataset listings",
-        "alt": "Product listings",
-        "type": "image"
-      },
-      {
-        "id": "media-1781005449597-z4nkuv",
-        "url": "/uploads/1781005449587-943226598-Screenshot 2026-06-09 123543.png",
-        "caption": "Dataset page",
-        "alt": "Product page",
-        "type": "image"
-      }
-    ],
-    "detailSections": [
-      {
-        "title": "Context",
-        "copy": [
-          "The Health Data Gateway had grown into a powerful platform containing thousands of datasets, studies, and research resources. However, users faced challenges navigating large volumes of information, understanding dataset relationships, and finding relevant resources efficiently. The platform also needed to accommodate the needs of diverse user groups, each with different goals, technical knowledge, and research requirements. The challenge was to transform a highly complex system into an intuitive experience that made health data more discoverable, accessible, and actionable."
-        ]
-      },
-      {
-        "title": "Approach",
-        "copy": [
-          "I led UX activities focused on understanding user behaviours, pain points, and research workflows. Through stakeholder workshops, user research, journey mapping, and information architecture exercises, I identified opportunities to simplify navigation and improve discoverability. I restructured key areas of the platform, designed clearer search and filtering experiences, refined content hierarchies, and created scalable design patterns that could support future platform expansion. Throughout the process, I worked closely with researchers, subject matter experts, developers, and product stakeholders to ensure both user needs and technical requirements were addressed."
-        ]
-      },
-      {
-        "title": "Outcome",
-        "copy": [
-          "The redesign delivered a more intuitive and user-centred experience for discovering and exploring health data resources. By simplifying complex user journeys and improving information architecture, users were able to navigate the platform more efficiently and access relevant datasets with greater confidence. The work established a scalable foundation for future product development while helping Health Data Research UK further its mission of enabling data-driven health research across the UK."
-        ]
-      }
-    ]
-  },
-  {
     "id": "4",
     "title": "World of Warcraft App",
     "role": "UX Designer",
@@ -67,7 +7,7 @@
     "teamSize": "Solo",
     "description": "A mobile companion for World of Warcraft, designed from concept to production used by millions of users... later retired due to botting issues",
     "detailIntro": "Designing from scratch a high-quality mobile companion app for the World of Warcraft universe",
-    "imageUrl": "/uploads/1781026301585-402056634-Hero.png",
+    "imageUrl": "http://localhost:5000/uploads/1781026301585-402056634-Hero.png",
     "behanceLink": "https://worldofwarcraft.blizzard.com/en-us/news/24061010/the-wow-companion-app-retiring",
     "industry": "Gaming",
     "tags": [
@@ -78,21 +18,21 @@
     "media": [
       {
         "id": "media-1781014272103-7ebfii",
-        "url": "/uploads/1781014272079-488885990-Explainer 3.png",
+        "url": "http://localhost:5000/uploads/1781014272079-488885990-Explainer 3.png",
         "caption": "",
         "alt": "World of Warcraft App media",
         "type": "image"
       },
       {
         "id": "media-1781014277571-z1c1wg",
-        "url": "/uploads/1781014277564-383205219-Explainer 2.png",
+        "url": "http://localhost:5000/uploads/1781014277564-383205219-Explainer 2.png",
         "caption": "",
         "alt": "World of Warcraft App media",
         "type": "image"
       },
       {
         "id": "media-1781014283018-ck94ab",
-        "url": "/uploads/1781014283002-964361777-Explainer.png",
+        "url": "http://localhost:5000/uploads/1781014283002-964361777-Explainer.png",
         "caption": "",
         "alt": "World of Warcraft App media",
         "type": "image"
@@ -123,40 +63,39 @@
   },
   {
     "id": "2",
-    "title": "Major Telecoms brand product updates",
+    "title": "Vodafone new features",
     "role": "UX/UI Designer",
     "year": "2022",
     "teamSize": "40",
-    "description": "Expanding the product offering and including gamification for Vodafone, using the same components in a more innovative way to attract and keep customers. ",
+    "description": "Worked with a large global team of designers, expanding the product offering including gamification, using the same components in a more innovative way to attract and keep customers. ",
     "detailIntro": "Vodafone wanted to add gamification and inspiration from social media apps to retain users ",
-    "imageUrl": "/uploads/1781007098502-770436925-Vodafone homepage ss.png",
+    "imageUrl": "http://localhost:5000/uploads/1781028866491-138253364-Vodafone Cover.png",
     "behanceLink": "https://www.vodafone.co.uk/my-vodafone-account/my-vodafone-app",
     "industry": "Retail",
     "tags": [
       "Gamification",
-      "App Design",
       "Interaction Design",
       "Telecom"
     ],
     "media": [
       {
-        "id": "media-1781007664733-7n85a6",
-        "url": "/uploads/1781007664713-233218388-Vodafone marketplace.png",
-        "caption": "Vodafone marketplace",
-        "alt": "Major Telecoms brand product updates media",
+        "id": "media-1781030326233-atu2hz",
+        "url": "http://localhost:5000/uploads/1781030326214-319542417-Promo.jpg",
+        "caption": "Gamification",
+        "alt": "Vodafone new features media",
+        "type": "image"
+      },
+      {
+        "id": "media-1781030345541-detlgw",
+        "url": "http://localhost:5000/uploads/1781030345508-786280481-Different countries.jpeg",
+        "caption": "Multiple regions",
+        "alt": "Vodafone new features media",
         "type": "image"
       },
       {
         "id": "media-1781007712317-876z0o",
-        "url": "/uploads/1781007712254-408975728-Vodafone full page ss.png",
+        "url": "http://localhost:5000/uploads/1781007712254-408975728-Vodafone full page ss.png",
         "caption": "Vodafone full page ss",
-        "alt": "Major Telecoms brand product updates media",
-        "type": "image"
-      },
-      {
-        "id": "media-1781007744271-vc7rnj",
-        "url": "/uploads/1781007744255-650163407-Vodafone home bar.png",
-        "caption": "Vodafone home bar",
         "alt": "Major Telecoms brand product updates media",
         "type": "image"
       }
@@ -184,20 +123,79 @@
     ]
   },
   {
+    "id": "1",
+    "title": "NHS project built on salesforce",
+    "role": "Lead Product Designer",
+    "year": "2024",
+    "teamSize": "2",
+    "description": "A comprehensive redesign of an in-depth web based research platform tailored to medical researchers. It was just as complex as it sounds!",
+    "detailIntro": "Redesigning the Health Data Gateway from scratch.",
+    "imageUrl": "http://localhost:5000/uploads/1781024476313-149742925-Celestial Laptop Mockup.png",
+    "behanceLink": "https://healthdatagateway.org/en",
+    "industry": "Health",
+    "tags": [
+      "SAAS",
+      "B2B",
+      "Figma"
+    ],
+    "media": [
+      {
+        "id": "media-1781005431873-nr3kba",
+        "url": "http://localhost:5000/uploads/1781005431841-765354048-Screenshot 2026-06-09 122621.png",
+        "caption": "Homepage",
+        "alt": "Homepage",
+        "type": "image"
+      },
+      {
+        "id": "media-1781005446755-dov197",
+        "url": "http://localhost:5000/uploads/1781005446747-115999573-Screenshot 2026-06-09 123531.png",
+        "caption": "Dataset listings",
+        "alt": "Product listings",
+        "type": "image"
+      },
+      {
+        "id": "media-1781005449597-z4nkuv",
+        "url": "http://localhost:5000/uploads/1781005449587-943226598-Screenshot 2026-06-09 123543.png",
+        "caption": "Dataset page",
+        "alt": "Product page",
+        "type": "image"
+      }
+    ],
+    "detailSections": [
+      {
+        "title": "Context",
+        "copy": [
+          "The Health Data Gateway had grown into a powerful platform containing thousands of datasets, studies, and research resources. However, users faced challenges navigating large volumes of information, understanding dataset relationships, and finding relevant resources efficiently. The platform also needed to accommodate the needs of diverse user groups, each with different goals, technical knowledge, and research requirements. The challenge was to transform a highly complex system into an intuitive experience that made health data more discoverable, accessible, and actionable."
+        ]
+      },
+      {
+        "title": "Approach",
+        "copy": [
+          "I led UX activities focused on understanding user behaviours, pain points, and research workflows. Through stakeholder workshops, user research, journey mapping, and information architecture exercises, I identified opportunities to simplify navigation and improve discoverability. I restructured key areas of the platform, designed clearer search and filtering experiences, refined content hierarchies, and created scalable design patterns that could support future platform expansion. Throughout the process, I worked closely with researchers, subject matter experts, developers, and product stakeholders to ensure both user needs and technical requirements were addressed."
+        ]
+      },
+      {
+        "title": "Outcome",
+        "copy": [
+          "The redesign delivered a more intuitive and user-centred experience for discovering and exploring health data resources. By simplifying complex user journeys and improving information architecture, users were able to navigate the platform more efficiently and access relevant datasets with greater confidence. The work established a scalable foundation for future product development while helping Health Data Research UK further its mission of enabling data-driven health research across the UK."
+        ]
+      }
+    ]
+  },
+  {
     "id": "3",
-    "title": "Healthcare Dashboard",
-    "role": "Product Designer",
-    "year": "2023",
-    "teamSize": "",
+    "title": "Ai Built Global Recipe Platform",
+    "role": "Founding designer",
+    "year": "2025",
+    "teamSize": "2",
     "description": "Designed an intuitive dashboard for healthcare professionals to monitor patient data and manage appointments efficiently.",
     "detailIntro": "",
     "imageUrl": "https://images.unsplash.com/photo-1504868584819-f8e8b4b6d7e3?q=80&w=1600&auto=format&fit=crop",
-    "behanceLink": "https://www.behance.net/yemiui",
-    "industry": "Healthcare",
+    "behanceLink": "https://www.cultif.com",
+    "industry": "Food",
     "tags": [
-      "SaaS UI",
-      "Dashboard",
-      "Data Visualization"
+      "SaaS",
+      "Ai"
     ],
     "media": [],
     "detailSections": []
