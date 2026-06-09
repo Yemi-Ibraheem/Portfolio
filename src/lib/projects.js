@@ -32,20 +32,39 @@ const normaliseMediaItem = (item, index) => {
   };
 };
 
+const normaliseDetailSection = (section, index) => {
+  const copy = Array.isArray(section?.copy)
+    ? section.copy
+    : String(section?.copy ?? '')
+        .split('\n')
+        .map((paragraph) => paragraph.trim());
+
+  return {
+    title: section?.title ?? ['Context', 'Approach', 'Outcome'][index] ?? `Section ${index + 1}`,
+    copy: copy.filter(Boolean),
+  };
+};
+
 const normaliseProject = (project) => {
   const media = Array.isArray(project.media) ? project.media : project.gallery;
+  const detailSections = Array.isArray(project.detailSections)
+    ? project.detailSections.map(normaliseDetailSection).filter((section) => section.copy.length > 0)
+    : [];
 
   return {
     id: String(project.id ?? ''),
     title: project.title ?? '',
     role: project.role ?? '',
     year: project.year ?? '',
+    teamSize: project.teamSize ?? '',
     description: project.description ?? '',
+    detailIntro: project.detailIntro ?? '',
     imageUrl: project.imageUrl ?? '',
     behanceLink: project.behanceLink ?? '',
     industry: project.industry ?? project.role ?? '',
     tags: Array.isArray(project.tags) ? project.tags : [],
     media: Array.isArray(media) ? media.map(normaliseMediaItem).filter((item) => item.url) : [],
+    detailSections,
   };
 };
 

@@ -23,6 +23,10 @@ const getFocusLine = (project) => {
 };
 
 const getProjectSections = (project) => {
+  if (project.detailSections.length > 0) {
+    return project.detailSections;
+  }
+
   const focusLine = getFocusLine(project);
   const industry = project.industry || 'digital product';
 
@@ -53,7 +57,7 @@ const getProjectSections = (project) => {
 const getGalleryItems = (project) => {
   if (project.media.length > 0) {
     return project.media.map((item, index) => ({
-      title: item.caption || project.title,
+      title: item.caption || '',
       label: item.type === 'gif' ? 'Animated sequence' : `Gallery ${index + 1}`,
       url: item.url,
       alt: item.alt || item.caption || `${project.title} gallery media ${index + 1}`,
@@ -111,6 +115,7 @@ const ProjectDetail = () => {
   const accent = getProjectAccent(project.id);
   const sections = getProjectSections(project);
   const galleryItems = getGalleryItems(project);
+  const detailIntro = project.detailIntro || project.description;
 
   return (
     <Motion.div
@@ -143,14 +148,15 @@ const ProjectDetail = () => {
             <p className="text-3xl font-black leading-none text-[var(--case-accent)] md:text-4xl">
               {project.title}
             </p>
-            <h1 className="mt-4 max-w-[760px] text-4xl font-black leading-[1.04] text-text sm:text-6xl lg:text-7xl">
-              {project.description}
+            <h1 className="mt-4 max-w-[760px] text-3xl font-black leading-tight text-text sm:text-4xl lg:text-5xl">
+              {detailIntro}
             </h1>
 
-            <dl className="mt-8 grid max-w-2xl grid-cols-3 gap-5">
+            <dl className="mt-8 grid max-w-3xl grid-cols-2 gap-5 sm:grid-cols-4">
               {[
                 ['Role', project.role],
                 ['Industry', project.industry || project.role],
+                ['Team size', project.teamSize || 'Team size'],
                 ['Year', project.year],
               ].map(([label, value]) => (
                 <div key={label} className="min-w-0">
@@ -252,11 +258,11 @@ const ProjectDetail = () => {
                         }}
                       />
                     )}
-                    <div className="absolute inset-0 bg-[linear-gradient(90deg,var(--surface)_0%,color-mix(in_srgb,var(--surface)_84%,transparent)_34%,transparent_78%)]" />
-                    <figcaption className="absolute bottom-8 left-8 max-w-[240px]">
-                      <p className="text-2xl font-black leading-tight text-text">{item.title}</p>
-                      <p className="mt-2 text-xl font-semibold leading-tight text-text">{item.label}</p>
-                    </figcaption>
+                    {item.title && (
+                      <figcaption className="absolute bottom-8 left-8 max-w-[260px] rounded-md bg-surface/82 px-4 py-3 backdrop-blur-sm">
+                        <p className="text-xl font-semibold leading-tight text-text">{item.title}</p>
+                      </figcaption>
+                    )}
                     {item.type === 'gif' && (
                       <div className="absolute right-6 top-6 rounded-full bg-text px-3 py-2 text-xs font-black uppercase text-background">
                         GIF

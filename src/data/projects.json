@@ -1,46 +1,205 @@
 [
   {
     "id": "1",
-    "title": "Fintech Mobile App",
+    "title": "NHS project built on salesforce",
     "role": "Lead Product Designer",
     "year": "2024",
-    "description": "A comprehensive redesign of a consumer fintech application, focusing on simplified money transfers and clear financial insights.",
+    "teamSize": "2",
+    "description": "A comprehensive redesign of an in-depth web based research platform tailored to medical researchers. It was just as complex as it sounds!",
+    "detailIntro": "Redesigning the Health Data Gateway from scratch.",
     "imageUrl": "https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=1600&auto=format&fit=crop",
-    "behanceLink": "https://www.behance.net/yemiui",
-    "industry": "Fintech",
-    "tags": ["UX Research", "UI Design", "Prototyping"]
+    "behanceLink": "https://healthdatagateway.org/en",
+    "industry": "Health",
+    "tags": [
+      "SAAS",
+      "B2B",
+      "Figma"
+    ],
+    "media": [
+      {
+        "id": "media-1781005431873-nr3kba",
+        "url": "/uploads/1781005431841-765354048-Screenshot 2026-06-09 122621.png",
+        "caption": "Homepage",
+        "alt": "Homepage",
+        "type": "image"
+      },
+      {
+        "id": "media-1781005446755-dov197",
+        "url": "/uploads/1781005446747-115999573-Screenshot 2026-06-09 123531.png",
+        "caption": "Dataset listings",
+        "alt": "Product listings",
+        "type": "image"
+      },
+      {
+        "id": "media-1781005449597-z4nkuv",
+        "url": "/uploads/1781005449587-943226598-Screenshot 2026-06-09 123543.png",
+        "caption": "Dataset page",
+        "alt": "Product page",
+        "type": "image"
+      }
+    ],
+    "detailSections": [
+      {
+        "title": "Context",
+        "copy": [
+          "The Health Data Gateway had grown into a powerful platform containing thousands of datasets, studies, and research resources. However, users faced challenges navigating large volumes of information, understanding dataset relationships, and finding relevant resources efficiently. The platform also needed to accommodate the needs of diverse user groups, each with different goals, technical knowledge, and research requirements. The challenge was to transform a highly complex system into an intuitive experience that made health data more discoverable, accessible, and actionable."
+        ]
+      },
+      {
+        "title": "Approach",
+        "copy": [
+          "I led UX activities focused on understanding user behaviours, pain points, and research workflows. Through stakeholder workshops, user research, journey mapping, and information architecture exercises, I identified opportunities to simplify navigation and improve discoverability. I restructured key areas of the platform, designed clearer search and filtering experiences, refined content hierarchies, and created scalable design patterns that could support future platform expansion. Throughout the process, I worked closely with researchers, subject matter experts, developers, and product stakeholders to ensure both user needs and technical requirements were addressed."
+        ]
+      },
+      {
+        "title": "Outcome",
+        "copy": [
+          "The redesign delivered a more intuitive and user-centred experience for discovering and exploring health data resources. By simplifying complex user journeys and improving information architecture, users were able to navigate the platform more efficiently and access relevant datasets with greater confidence. The work established a scalable foundation for future product development while helping Health Data Research UK further its mission of enabling data-driven health research across the UK."
+        ]
+      }
+    ]
   },
   {
     "id": "2",
-    "title": "E-Commerce Experience",
+    "title": "Major Telecoms brand product updates",
     "role": "UX/UI Designer",
-    "year": "2023",
-    "description": "Optimized the checkout flow and user experience for an emerging fashion e-commerce brand, increasing conversion rates by 25%.",
-    "imageUrl": "https://images.unsplash.com/photo-1523381210434-271e8be1f52b?q=80&w=1600&auto=format&fit=crop",
-    "behanceLink": "https://www.behance.net/yemiui",
+    "year": "2022",
+    "teamSize": "40",
+    "description": "Expanding the product offering and including gamification for Vodafone, using the same components in a more innovative way to attract and keep customers. ",
+    "detailIntro": "Vodafone wanted to add gamification and inspiration from social media apps to retain users ",
+    "imageUrl": "/uploads/1781007098502-770436925-Vodafone homepage ss.png",
+    "behanceLink": "https://www.vodafone.co.uk/my-vodafone-account/my-vodafone-app",
     "industry": "Retail",
-    "tags": ["Web Design", "Interaction Design", "E-commerce"]
+    "tags": [
+      "Gamification",
+      "App Design",
+      "Interaction Design",
+      "Telecom"
+    ],
+    "media": [
+      {
+        "id": "media-1781007664733-7n85a6",
+        "url": "/uploads/1781007664713-233218388-Vodafone marketplace.png",
+        "caption": "Vodafone marketplace",
+        "alt": "Major Telecoms brand product updates media",
+        "type": "image"
+      },
+      {
+        "id": "media-1781007712317-876z0o",
+        "url": "/uploads/1781007712254-408975728-Vodafone full page ss.png",
+        "caption": "Vodafone full page ss",
+        "alt": "Major Telecoms brand product updates media",
+        "type": "image"
+      },
+      {
+        "id": "media-1781007744271-vc7rnj",
+        "url": "/uploads/1781007744255-650163407-Vodafone home bar.png",
+        "caption": "Vodafone home bar",
+        "alt": "Major Telecoms brand product updates media",
+        "type": "image"
+      }
+    ],
+    "detailSections": [
+      {
+        "title": "Context",
+        "copy": [
+          "Vodafone’s mobile apps served a wide and diverse user base across different regions, each with varying needs, behaviours, and expectations. The challenge was not only to modernise the app experience, but to make it more engaging and valuable enough for users to return to regularly. Traditional telecom app experiences can often feel purely transactional, focused on checking usage, managing bills, or accessing support. Vodafone wanted to explore ways to make the experience feel more dynamic, personalised, and rewarding while still maintaining clarity, trust, and brand consistency at scale."
+        ]
+      },
+      {
+        "title": "Approach",
+        "copy": [
+          "My approach focused on combining strong product thinking with user-centred design. I explored how familiar interaction patterns from social media apps could be adapted into a telecom environment, making the experience feel more intuitive, engaging, and repeatable. This included concepts around gamification, rewards, progress, personalised content, and more interactive journeys designed to encourage users to engage with the app beyond basic account management.",
+          "I worked closely with Vodafone stakeholders from different regions, running and contributing to meetings that helped align product goals, market needs, business priorities, and design direction. Through design exploration, wireframing, prototyping, stakeholder feedback, and iteration, I helped shape app experiences that could work across multiple markets while still feeling relevant to local users. The work required balancing creativity with enterprise-level constraints, ensuring that new design ideas could sit comfortably within Vodafone’s wider ecosystem."
+        ]
+      },
+      {
+        "title": "Outcome",
+        "copy": [
+          "The work helped Vodafone explore a more engaging direction for their app experiences, moving beyond purely functional journeys toward a more interactive, retention-focused product experience. By introducing gamification principles and social media-inspired interaction patterns, the designs created opportunities to increase repeat engagement, strengthen customer loyalty, and make the app feel more useful in users’ daily lives. The project also helped align global stakeholders around a clearer product vision, supporting a scalable design direction that could be adapted across Vodafone markets."
+        ]
+      }
+    ]
+  },
+  {
+    "id": "4",
+    "title": "World of Warcraft App",
+    "role": "UX Designer",
+    "year": "2020",
+    "teamSize": "Solo",
+    "description": "A mobile companion for World of Warcraft, designed from concept to production used by millions of users... later retired due to botting issues",
+    "detailIntro": "Designing from scratch a high-quality mobile companion app for the World of Warcraft universe",
+    "imageUrl": "/uploads/1781008129977-607168595-Desktops.png",
+    "behanceLink": "https://worldofwarcraft.blizzard.com/en-us/news/24061010/the-wow-companion-app-retiring",
+    "industry": "Gaming",
+    "tags": [
+      "App",
+      "APIs",
+      "Gaming"
+    ],
+    "media": [
+      {
+        "id": "media-1781014272103-7ebfii",
+        "url": "/uploads/1781014272079-488885990-Explainer 3.png",
+        "caption": "",
+        "alt": "World of Warcraft App media",
+        "type": "image"
+      },
+      {
+        "id": "media-1781014277571-z1c1wg",
+        "url": "/uploads/1781014277564-383205219-Explainer 2.png",
+        "caption": "",
+        "alt": "World of Warcraft App media",
+        "type": "image"
+      },
+      {
+        "id": "media-1781014283018-ck94ab",
+        "url": "/uploads/1781014283002-964361777-Explainer.png",
+        "caption": "",
+        "alt": "World of Warcraft App media",
+        "type": "image"
+      }
+    ],
+    "detailSections": [
+      {
+        "title": "Context",
+        "copy": [
+          "World of Warcraft has a deep and highly detailed player experience, with layers of characters, progression systems, guilds, quests, items, achievements, and community interaction. The challenge was to design a companion app that could simplify this complexity without stripping away the atmosphere and depth that players expect from the franchise. The product needed to feel useful, immersive, and credible to a gaming audience while also being clear enough to present as a commercially valuable mobile product.",
+          "The app was created within an investor-led environment, meaning the design had to do more than look good. It needed to demonstrate product potential, show how the experience could fit into the wider World of Warcraft ecosystem, and communicate a compelling vision that could be understood by both business stakeholders and gaming users."
+        ]
+      },
+      {
+        "title": "Approach",
+        "copy": [
+          "My approach focused on combining strong mobile UX principles with high-quality visual design suited to a fantasy gaming product. I explored how core companion app features could be organised into simple, accessible journeys, allowing users to quickly access character information, progression updates, social features, and in-game related content without feeling overwhelmed.",
+          "I created interface designs that balanced usability with atmosphere, using clear layouts, strong visual hierarchy, game-inspired styling, and intuitive interaction patterns. The goal was to make the app feel premium and familiar to players while still functioning like a modern mobile product. I also considered how the design could support investor conversations by making the product vision easy to understand, visually impressive, and commercially compelling."
+        ]
+      },
+      {
+        "title": "Outcome",
+        "copy": [
+          "The final designs helped position the companion app as a polished, high-value mobile product concept capable of extending the World of Warcraft experience beyond the main game. The UI work gave the product a strong visual identity, clear user journeys, and a professional level of presentation that supported stakeholder and investor confidence. The project demonstrated my ability to translate a complex entertainment IP into a refined mobile experience, balancing fan expectations, product usability, and commercial storytelling."
+        ]
+      }
+    ]
   },
   {
     "id": "3",
     "title": "Healthcare Dashboard",
     "role": "Product Designer",
     "year": "2023",
+    "teamSize": "",
     "description": "Designed an intuitive dashboard for healthcare professionals to monitor patient data and manage appointments efficiently.",
+    "detailIntro": "",
     "imageUrl": "https://images.unsplash.com/photo-1504868584819-f8e8b4b6d7e3?q=80&w=1600&auto=format&fit=crop",
     "behanceLink": "https://www.behance.net/yemiui",
     "industry": "Healthcare",
-    "tags": ["SaaS UI", "Dashboard", "Data Visualization"]
-  },
-  {
-    "id": "4",
-    "title": "Smart Home Hub",
-    "role": "UX Designer",
-    "year": "2022",
-    "description": "A dark-mode focused application controlling IoT smart home devices with seamless onboarding and intuitive controls.",
-    "imageUrl": "https://images.unsplash.com/photo-1558002038-1055907df827?q=80&w=1600&auto=format&fit=crop",
-    "behanceLink": "https://www.behance.net/yemiui",
-    "industry": "IoT",
-    "tags": ["Mobile App", "IoT", "Dark Mode"]
+    "tags": [
+      "SaaS UI",
+      "Dashboard",
+      "Data Visualization"
+    ],
+    "media": [],
+    "detailSections": []
   }
 ]

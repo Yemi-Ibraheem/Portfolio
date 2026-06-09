@@ -29,7 +29,7 @@ const ProjectCard = ({ project, index }) => {
       <div className="border-t border-glass-border pt-6 lg:border-t-0 lg:pt-0">
         <div className="mb-5 flex items-center justify-between gap-4 text-xs font-black uppercase text-text-muted">
           <span>{String(index + 1).padStart(2, '0')}</span>
-          <span>{project.year}</span>
+          <span>{project.teamSize || 'Team size'}</span>
         </div>
 
         <h3 className="text-4xl font-black leading-[0.95] text-text sm:text-5xl">{project.title}</h3>

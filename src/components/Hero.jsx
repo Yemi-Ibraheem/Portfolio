@@ -76,7 +76,7 @@ const Hero = ({ projects = [], isLoading }) => {
                 )}
                 <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/10 to-transparent" />
                 <div className="absolute bottom-4 left-4 right-4 text-white">
-                  <p className="text-xs font-bold uppercase opacity-75">{project.year}</p>
+                  <p className="text-xs font-bold uppercase opacity-75">{project.teamSize || 'Team size'}</p>
                   <h2 className="mt-1 text-xl font-black leading-none">{project.title}</h2>
                 </div>
               </Link>

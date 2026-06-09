@@ -7,13 +7,31 @@ const emptyProject = () => ({
   title: '',
   role: '',
   year: new Date().getFullYear().toString(),
+  teamSize: '',
   description: '',
+  detailIntro: '',
   imageUrl: '',
   behanceLink: '',
   industry: '',
   tags: [],
   media: [],
+  detailSections: [
+    { title: 'Context', copy: [] },
+    { title: 'Approach', copy: [] },
+    { title: 'Outcome', copy: [] },
+  ],
 });
+
+const productSectionTitles = ['Context', 'Approach', 'Outcome'];
+
+const normaliseEditableSections = (sections = []) =>
+  productSectionTitles.map((title, index) => {
+    const section = sections[index] || {};
+    return {
+      title: section.title || title,
+      copy: Array.isArray(section.copy) ? section.copy : [],
+    };
+  });
 
 const createMediaItem = ({ url, caption = '', alt = '', type }) => ({
   id: `media-${Date.now()}-${Math.random().toString(36).slice(2, 8)}`,
@@ -123,6 +141,12 @@ const Admin = () => {
       ...currentProject,
       id: currentProject.id || (Math.max(0, ...projects.map((project) => Number(project.id) || 0)) + 1).toString(),
       tags: currentProject.tags.filter(Boolean),
+      detailSections: normaliseEditableSections(currentProject.detailSections)
+        .map((section) => ({
+          ...section,
+          copy: section.copy.map((paragraph) => paragraph.trim()).filter(Boolean),
+        }))
+        .filter((section) => section.copy.length > 0),
       media: (currentProject.media || [])
         .filter((item) => item.url)
         .map((item, index) => ({
@@ -291,6 +315,18 @@ const Admin = () => {
     }
   };
 
+  const updateDetailSectionCopy = (index, value) => {
+    const sections = normaliseEditableSections(currentProject.detailSections);
+    sections[index] = {
+      ...sections[index],
+      copy: value
+        .split('\n')
+        .map((paragraph) => paragraph.trim())
+        .filter(Boolean),
+    };
+    setCurrentProject({ ...currentProject, detailSections: sections });
+  };
+
   if (!isAuthenticated) {
     return (
       <div className="flex min-h-screen items-center justify-center bg-background px-4 pt-28">
@@ -373,7 +409,7 @@ const Admin = () => {
                 {project.imageUrl && <img src={project.imageUrl} alt={project.title} className="h-full w-full object-cover" />}
               </div>
               <div>
-                <p className="text-xs font-black uppercase text-text-muted">{project.year} / {project.role}</p>
+                <p className="text-xs font-black uppercase text-text-muted">{project.teamSize || 'Team size'} / {project.role}</p>
                 <h2 className="mt-2 text-3xl font-black leading-none">{project.title}</h2>
                 <p className="mt-3 max-w-2xl text-sm leading-relaxed text-text-muted">{project.description}</p>
                 <div className="mt-3 flex flex-wrap gap-2">
@@ -445,7 +481,7 @@ const Admin = () => {
                       required
                     />
                   </label>
-                  <div className="grid gap-4 md:grid-cols-[1.4fr_1fr_0.65fr]">
+                  <div className="grid gap-4 md:grid-cols-[1.2fr_1fr_0.8fr_0.65fr]">
                     <label className="block text-sm font-bold text-text-muted">
                       Role
                       <input
@@ -463,6 +499,16 @@ const Admin = () => {
                         value={currentProject.industry}
                         onChange={(event) => setCurrentProject({ ...currentProject, industry: event.target.value })}
                         className="mt-2 w-full rounded-2xl border border-glass-border bg-surface px-4 py-3 text-text outline-none focus:border-primary"
+                      />
+                    </label>
+                    <label className="block text-sm font-bold text-text-muted">
+                      Team size
+                      <input
+                        type="text"
+                        value={currentProject.teamSize}
+                        onChange={(event) => setCurrentProject({ ...currentProject, teamSize: event.target.value })}
+                        className="mt-2 w-full rounded-2xl border border-glass-border bg-surface px-4 py-3 text-text outline-none focus:border-primary"
+                        placeholder="Solo, 4 people, 8-person squad"
                       />
                     </label>
                     <label className="block text-sm font-bold text-text-muted">
@@ -497,7 +543,7 @@ const Admin = () => {
                     />
                   </label>
                   <label className="block text-sm font-bold text-text-muted">
-                    Description
+                    Card description
                     <textarea
                       rows="7"
                       value={currentProject.description}
@@ -506,6 +552,34 @@ const Admin = () => {
                       required
                     />
                   </label>
+                  <div className="rounded-[24px] border border-glass-border bg-surface p-4">
+                    <p className="text-sm font-black text-text">Product page descriptions</p>
+                    <p className="mt-1 text-xs font-bold text-text-muted">These fields control the case-study detail page. Leave blank to use the automatic fallback copy.</p>
+                    <label className="mt-4 block text-sm font-bold text-text-muted">
+                      Product page intro
+                      <textarea
+                        rows="4"
+                        value={currentProject.detailIntro}
+                        onChange={(event) => setCurrentProject({ ...currentProject, detailIntro: event.target.value })}
+                        className="mt-2 w-full rounded-2xl border border-glass-border bg-background px-4 py-3 text-text outline-none focus:border-primary"
+                        placeholder="Large intro text at the top of the product page"
+                      />
+                    </label>
+                    <div className="mt-4 grid gap-4">
+                      {normaliseEditableSections(currentProject.detailSections).map((section, index) => (
+                        <label key={section.title} className="block text-sm font-bold text-text-muted">
+                          {section.title}
+                          <textarea
+                            rows="5"
+                            value={section.copy.join('\n')}
+                            onChange={(event) => updateDetailSectionCopy(index, event.target.value)}
+                            className="mt-2 w-full rounded-2xl border border-glass-border bg-background px-4 py-3 text-text outline-none focus:border-primary"
+                            placeholder={`Product page ${section.title.toLowerCase()} copy`}
+                          />
+                        </label>
+                      ))}
+                    </div>
+                  </div>
                 </div>
 
                 <div className="space-y-4">
@@ -540,7 +614,7 @@ const Admin = () => {
                   <div className="rounded-[24px] border border-glass-border bg-surface p-4">
                     <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
                       <div>
-                        <p className="text-sm font-black text-text">Gallery media</p>
+                        <p className="text-sm font-black text-text">Product page images</p>
                         <p className="mt-1 text-xs font-bold text-text-muted">Images and GIFs appear on the product page gallery.</p>
                       </div>
                       <button
